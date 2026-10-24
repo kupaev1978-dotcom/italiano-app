@@ -1,0 +1,261 @@
+:root {
+  --green: #58cc02;
+  --green-dark: #46a302;
+  --blue: #1cb0f6;
+  --blue-dark: #1899d6;
+  --red: #ff4b4b;
+  --red-dark: #d33131;
+  --bg: #f7f7f7;
+  --card: #ffffff;
+  --text: #3c3c3c;
+  --muted: #999999;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 16px;
+  padding-top: calc(16px + env(safe-area-inset-top));
+  padding-bottom: calc(28px + env(safe-area-inset-bottom));
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stat {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 10px 12px;
+  font-weight: 800;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.exit {
+  margin-left: auto;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.06);
+  line-height: 1.45;
+}
+
+.card h1 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.card h3 {
+  margin: 18px 0 10px;
+  font-size: 16px;
+  color: #777777;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.card p {
+  margin: 10px 0;
+}
+
+.lesson-list {
+  display: grid;
+  gap: 10px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  background: #e5e5e5;
+  color: #ffffff;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+.btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.btn-green {
+  background: var(--green);
+  box-shadow: 0 4px 0 var(--green-dark);
+  color: #ffffff;
+}
+
+.btn-blue {
+  background: var(--blue);
+  box-shadow: 0 4px 0 var(--blue-dark);
+  color: #ffffff;
+}
+
+.btn-red {
+  background: var(--red);
+  box-shadow: 0 4px 0 var(--red-dark);
+  color: #ffffff;
+}
+
+.btn-disabled {
+  background: #d7d7d7;
+  box-shadow: 0 4px 0 #b9b9b9;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+.tip {
+  background: #fff8d6;
+  border: 2px solid #ffc800;
+  border-radius: 16px;
+  padding: 12px;
+  margin: 12px 0;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.option {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-bottom-width: 4px;
+  border-radius: 16px;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.option.selected {
+  border-color: var(--blue);
+  background: #e7f5fe;
+}
+
+.input {
+  width: 100%;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 14px;
+  font-size: 18px;
+  margin-top: 14px;
+  background: #ffffff;
+  color: var(--text);
+}
+
+.build-answer {
+  min-height: 62px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  background: #ffffff;
+  border: 2px dashed #cfcfcf;
+  border-radius: 16px;
+  padding: 10px;
+  margin-top: 14px;
+}
+
+.chip {
+  background: #e7f5fe;
+  border: 2px solid var(--blue);
+  color: #0a5c86;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-weight: 800;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.word {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-bottom-width: 4px;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-weight: 800;
+  font-size: 17px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.word.used {
+  opacity: 0.35;
+}
+
+.feedback {
+  border-radius: 16px;
+  padding: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.feedback.good {
+  background: #e8f8d4;
+  color: #3f7d00;
+}
+
+.feedback.bad {
+  background: #ffe5e5;
+  color: #b30000;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 15px;
+}
