@@ -75,17 +75,14 @@ function isLessonUnlocked(id) {
   const lessons = getAllLessons();
   const index = lessons.findIndex(item => item.id === id);
 
-  // Первый урок всегда открыт
   if (index === 0) {
     return true;
   }
 
-  // Если урок не найден в списке, открываем его (на всякий случай)
   if (index === -1) {
     return true;
   }
 
-  // Проверяем, пройден ли предыдущий урок
   return state.completedLessons.includes(lessons[index - 1].id);
 }
 
@@ -121,6 +118,43 @@ function normalize(text) {
     .replace(/[.,!?;:«»"']/g, '')
     .replace(/\s+/g, ' ');
 }
+
+// ---- История браузера (чтобы работала системная стрелка «назад») ----
+
+function pushHistoryLesson(id) {
+  try {
+    history.pushState({ page: 'lesson', lessonId: id }, '');
+  } catch (e) {
+    // если браузер не дал — не страшно, кнопки всё равно работают
+  }
+}
+
+function goBackToHome() {
+  try {
+    if (history.state && history.state.page === 'lesson') {
+      history.back();
+      return;
+    }
+  } catch (e) {
+    // ignore
+  }
+  goHome();
+}
+
+window.addEventListener('popstate', function (event) {
+  const st = event.state;
+
+  if (st && st.page === 'lesson' && window.LESSONS && window.LESSONS[st.lessonId]) {
+    startLesson(st.lessonId, false);
+  } else {
+    currentLesson = null;
+    lessonState = null;
+    view = { name: 'home' };
+    render();
+  }
+});
+
+// ---- Рендер ----
 
 function render() {
   if (!app) return;
@@ -232,9 +266,9 @@ function renderTheory() {
   app.innerHTML = `
     <div class="container">
       <div class="topbar">
+        <button id="backBtn" class="back-btn" type="button">← Назад</button>
         <div class="stat">❤️ ${lessonState.hearts}</div>
         <div class="stat">Теория ${lessonState.theoryIndex + 1}/${currentLesson.theory.length}</div>
-        <button id="exitBtn" class="stat exit" type="button">✖️</button>
       </div>
 
       <div class="card theory">
@@ -359,9 +393,9 @@ function renderExercise() {
   app.innerHTML = `
     <div class="container">
       <div class="topbar">
+        <button id="backBtn" class="back-btn" type="button">← Назад</button>
         <div class="stat">❤️ ${lessonState.hearts}</div>
         <div class="stat">Задание ${lessonState.exerciseIndex + 1}/${currentLesson.exercises.length}</div>
-        <button id="exitBtn" class="stat exit" type="button">✖️</button>
       </div>
 
       <div class="card">
@@ -376,9 +410,9 @@ function renderExercise() {
 }
 
 function bindLesson() {
-  const exitButton = document.getElementById('exitBtn');
-  if (exitButton) {
-    exitButton.addEventListener('click', confirmExit);
+  const backButton = document.getElementById('backBtn');
+  if (backButton) {
+    backButton.addEventListener('click', confirmExit);
   }
 
   const nextTheoryButton = document.getElementById('nextTheoryBtn');
@@ -435,8 +469,8 @@ function bindLesson() {
   }
 }
 
-function openLesson(id) {
-  if (!isLessonAvailable(id)) {
+function startLesson(id, push) {
+  if (!window.LESSONS || !window.LESSONS[id]) {
     return;
   }
 
@@ -455,7 +489,19 @@ function openLesson(id) {
   };
 
   view = { name: 'lesson' };
+
+  if (push) {
+    pushHistoryLesson(id);
+  }
+
   render();
+}
+
+function openLesson(id) {
+  if (!isLessonAvailable(id)) {
+    return;
+  }
+  startLesson(id, true);
 }
 
 function nextTheory() {
@@ -647,7 +693,7 @@ function renderResult() {
 function bindResult() {
   const homeButton = document.querySelector('[data-home]');
   if (homeButton) {
-    homeButton.addEventListener('click', goHome);
+    homeButton.addEventListener('click', goBackToHome);
   }
 
   const retryButton = document.querySelector('[data-retry]');
@@ -683,7 +729,7 @@ function renderFailed() {
 function bindFailed() {
   const homeButton = document.querySelector('[data-home]');
   if (homeButton) {
-    homeButton.addEventListener('click', goHome);
+    homeButton.addEventListener('click', goBackToHome);
   }
 
   const retryButton = document.querySelector('[data-retry]');
@@ -701,7 +747,7 @@ function goHome() {
 
 function confirmExit() {
   if (confirm('Выйти из урока? Прогресс этого урока не сохранится.')) {
-    goHome();
+    goBackToHome();
   }
 }
 
@@ -711,6 +757,14 @@ function resetProgress() {
     saveState();
     render();
   }
+}
+
+// При загрузке страницы «сбрасываем» текущую запись истории на главную,
+// чтобы не было рассинхрона после перезагрузки посреди урока.
+try {
+  history.replaceState(null, '');
+} catch (e) {
+  // ignore
 }
 
 render();
