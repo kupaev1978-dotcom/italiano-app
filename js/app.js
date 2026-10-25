@@ -1231,17 +1231,25 @@ function goHome() {
 
 function hasLessonProgress() {
   if (!lessonState) return false;
-  if (lessonState.phase === 'exercise') return true;
-  if (lessonState.theoryIndex > 0) return true;
+
+  // На теории терять нечего: прогресс урока пишется только в конце.
+  if (lessonState.phase !== 'exercise') return false;
+
+  // В упражнениях считаем, что есть что терять, если уже было проверено
+  // хотя бы одно задание (перешёл дальше ИЛИ есть feedback по текущему).
+  if (lessonState.exerciseIndex > 0) return true;
+  if (lessonState.feedback) return true;
+
   return false;
 }
 
 function confirmExit() {
-  if (hasLessonProgress()) {
-    if (confirm('Выйти из урока? Прогресс этого урока не сохранится.')) {
-      goBackToHome();
-    }
-  } else {
+  if (!hasLessonProgress()) {
+    goBackToHome();
+    return;
+  }
+
+  if (confirm('Ты уже начал выполнять задания. Если выйдешь, урок начнётся заново: сердца и XP не сохранятся.')) {
     goBackToHome();
   }
 }
