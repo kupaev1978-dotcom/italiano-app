@@ -11,7 +11,8 @@ function defaultState() {
     xp: 0,
     streak: 0,
     lastActiveDate: null,
-    completedLessons: []
+    completedLessons: [],
+    devMode: false
   };
 }
 
@@ -109,6 +110,10 @@ function getPreviousExistingLessonId(id) {
 }
 
 function isLessonUnlocked(id) {
+  if (state.devMode) {
+    return true;
+  }
+
   const previousId = getPreviousExistingLessonId(id);
 
   if (!previousId) {
@@ -238,6 +243,9 @@ function importProgress(file) {
       }
       if (typeof state.streak !== 'number') {
         state.streak = 0;
+      }
+      if (typeof state.devMode !== 'boolean') {
+        state.devMode = false;
       }
 
       saveState();
@@ -507,6 +515,14 @@ function renderHome() {
       `).join('')}
 
       <div class="card">
+        <h3>⚙️ Режим разработчика</h3>
+        <p class="muted">${state.devMode ? "Включён: все уроки открыты — удобно тестировать новый контент." : "Выключен: уроки открываются по порядку, как в Duolingo."}</p>
+        <button class="btn ${state.devMode ? "btn-red" : "btn-blue"}" data-devmode type="button">
+          ${state.devMode ? "Выключить: уроки по порядку" : "Включить: открыть все уроки"}
+        </button>
+      </div>
+
+      <div class="card">
         <h3>Резервные копии</h3>
         <p class="muted">Сохрани прогресс в файл или загрузи его на другом устройстве.</p>
         <button class="btn btn-blue" data-export type="button">💾 Экспорт прогресса</button>
@@ -575,6 +591,17 @@ function bindHome() {
       event.target.value = '';
     });
   }
+
+  const devButton = document.querySelector('[data-devmode]');
+  if (devButton) {
+    devButton.addEventListener('click', toggleDevMode);
+  }
+}
+
+function toggleDevMode() {
+  state.devMode = !state.devMode;
+  saveState();
+  render();
 }
 
 function renderLesson() {
