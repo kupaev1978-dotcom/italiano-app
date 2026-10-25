@@ -1,4 +1,4 @@
-const CACHE_NAME = 'italiano-v4';
+const CACHE_NAME = 'italiano-v5';
 
 const CORE_ASSETS = [
   './index.html',
@@ -12,6 +12,9 @@ const CORE_ASSETS = [
 
   './data/course.js',
 
+  './data/lessons/a0-u1-l0.js',
+  './data/lessons/a0-u1-l0b.js',
+  './data/lessons/a0-u1-l0c.js',
   './data/lessons/a0-u1-l1.js',
   './data/lessons/a0-u1-l2.js',
   './data/lessons/a0-u1-l3.js',
