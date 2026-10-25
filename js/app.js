@@ -71,23 +71,55 @@ function getAllLessons() {
   return result;
 }
 
-function isLessonUnlocked(id) {
+function lessonExists(id) {
+  return Boolean(window.LESSONS && window.LESSONS[id]);
+}
+
+function findLessonMeta(id) {
+  if (!window.COURSE) return null;
+
+  for (const level of COURSE.levels) {
+    for (const unit of level.units) {
+      for (const lesson of unit.lessons) {
+        if (lesson.id === id) {
+          return lesson;
+        }
+      }
+    }
+  }
+
+  return null;
+}
+
+function getPreviousExistingLessonId(id) {
   const lessons = getAllLessons();
   const index = lessons.findIndex(item => item.id === id);
 
-  if (index === 0) {
-    return true;
-  }
-
   if (index === -1) {
+    return null;
+  }
+
+  for (let i = index - 1; i >= 0; i--) {
+    if (lessonExists(lessons[i].id)) {
+      return lessons[i].id;
+    }
+  }
+
+  return null;
+}
+
+function isLessonUnlocked(id) {
+  const previousId = getPreviousExistingLessonId(id);
+
+  if (!previousId) {
     return true;
   }
 
-  return state.completedLessons.includes(lessons[index - 1].id);
+  return state.completedLessons.includes(previousId);
 }
 
 function isLessonAvailable(id) {
-  return Boolean(window.LESSONS && window.LESSONS[id]) && isLessonUnlocked(id);
+  return lessonExists(id) && isLessonUnlocked(id);
 }
 
 function shuffle(array) {
@@ -119,7 +151,7 @@ function normalize(text) {
     .replace(/\s+/g, ' ');
 }
 
-// ---- История браузера (системная стрелка «назад») ----
+// ---- История браузера ----
 
 function pushHistoryLesson(id) {
   try {
@@ -138,13 +170,14 @@ function goBackToHome() {
   } catch (e) {
     // ignore
   }
+
   goHome();
 }
 
 window.addEventListener('popstate', function (event) {
   const st = event.state;
 
-  if (st && st.page === 'lesson' && window.LESSONS && window.LESSONS[st.lessonId]) {
+  if (st && st.page === 'lesson' && lessonExists(st.lessonId)) {
     startLesson(st.lessonId, false);
   } else {
     currentLesson = null;
@@ -154,7 +187,7 @@ window.addEventListener('popstate', function (event) {
   }
 });
 
-// ---- Экспорт / импорт прогресса ----
+// ---- Экспорт / импорт ----
 
 function exportProgress() {
   const payload = {
@@ -218,6 +251,209 @@ function importProgress(file) {
   reader.readAsText(file);
 }
 
+// ---- Теория ----
+
+function contentToHtml(content) {
+  if (!content) return '';
+
+  if (typeof content === 'string') {
+    return `<p>${escapeHtml(content)}</p>`;
+  }
+
+  if (Array.isArray(content)) {
+    return `<ul>` + content.map(item => {
+      if (typeof item === 'string') {
+        return `<li>${escapeHtml(item)}</li>`;
+      }
+
+      if (item && item.text) {
+        let li = `<li>${escapeHtml(item.text)}`;
+
+        if (item.sub) {
+          const subArray = Array.isArray(item.sub) ? item.sub : [item.sub];
+          li += `<ul>` + subArray.map(subItem => `<li>${escapeHtml(subItem)}</li>`).join('') + `</ul>`;
+        }
+
+        li += `</li>`;
+        return li;
+      }
+
+      return '';
+    }).join('') + `</ul>`;
+  }
+
+  return '';
+}
+
+function renderTable(table) {
+  if (!table) return '';
+
+  const headers = table.headers || [];
+  const rows = table.rows || [];
+
+  let html = `<table class="theory-table">`;
+
+  if (headers.length) {
+    html += `<thead><tr>`;
+    headers.forEach(header => {
+      html += `<th>${escapeHtml(header)}</th>`;
+    });
+    html += `</tr></thead>`;
+  }
+
+  html += `<tbody>`;
+
+  rows.forEach(row => {
+    const cells = Array.isArray(row) ? row : [row];
+    html += `<tr>`;
+    cells.forEach(cell => {
+      html += `<td>${escapeHtml(cell)}</td>`;
+    });
+    html += `</tr>`;
+  });
+
+  html += `</tbody></table>`;
+
+  return html;
+}
+
+function tipToHtml(tip) {
+  if (typeof tip === 'string') {
+    return `<div class="tip">💡 ${escapeHtml(tip)}</div>`;
+  }
+
+  if (tip && tip.html) {
+    return `<div class="tip">💡 ${tip.html}</div>`;
+  }
+
+  if (tip && tip.text) {
+    return `<div class="tip">💡 ${escapeHtml(tip.text)}</div>`;
+  }
+
+  return '';
+}
+
+function mistakeToHtml(mistake) {
+  if (typeof mistake === 'string') {
+    return `<div class="warn">⚠️ ${escapeHtml(mistake)}</div>`;
+  }
+
+  if (mistake && mistake.html) {
+    return `<div class="warn">⚠️ ${mistake.html}</div>`;
+  }
+
+  if (mistake && mistake.text) {
+    return `<div class="warn">⚠️ ${escapeHtml(mistake.text)}</div>`;
+  }
+
+  return '';
+}
+
+function exampleToHtml(example) {
+  if (typeof example === 'string') {
+    return `<li>${escapeHtml(example)}</li>`;
+  }
+
+  if (!example) return '';
+
+  const it = example.it || example.italian || example.text || '';
+  const ru = example.ru || example.translation || '';
+  const note = example.note || '';
+
+  let html = `<li><b>${escapeHtml(it)}</b>`;
+
+  if (ru) {
+    html += ` — ${escapeHtml(ru)}`;
+  }
+
+  if (note) {
+    html += `<br><span class="muted">${escapeHtml(note)}</span>`;
+  }
+
+  html += `</li>`;
+
+  return html;
+}
+
+function dialogLineToHtml(line) {
+  if (typeof line === 'string') {
+    return `<p>${escapeHtml(line)}</p>`;
+  }
+
+  if (!line) return '';
+
+  const speaker = line.who || line.speaker || '';
+  const text = line.text || line.it || line.italian || '';
+  const ru = line.ru || line.translation || '';
+
+  let html = `<p>`;
+
+  if (speaker) {
+    html += `<b>${escapeHtml(speaker)}:</b> `;
+  }
+
+  html += escapeHtml(text);
+
+  if (ru) {
+    html += `<br><span class="muted">${escapeHtml(ru)}</span>`;
+  }
+
+  html += `</p>`;
+
+  return html;
+}
+
+function theoryItemToHtml(item) {
+  if (!item) return '';
+
+  if (item.html) {
+    return item.html;
+  }
+
+  let html = '';
+
+  if (item.title) {
+    html += `<h2>${escapeHtml(item.title)}</h2>`;
+  }
+
+  if (item.summary) {
+    html += `<p><b>${escapeHtml(item.summary)}</b></p>`;
+  }
+
+  if (item.rule) {
+    html += `<h3>Правило</h3>`;
+    html += contentToHtml(item.rule);
+  }
+
+  if (item.table) {
+    html += renderTable(item.table);
+  }
+
+  if (item.tips && item.tips.length) {
+    html += item.tips.map(tipToHtml).join('');
+  }
+
+  if (item.mistakes && item.mistakes.length) {
+    html += item.mistakes.map(mistakeToHtml).join('');
+  }
+
+  if (item.examples && item.examples.length) {
+    html += `<h3>Примеры</h3>`;
+    html += `<ul class="examples">` + item.examples.map(exampleToHtml).join('') + `</ul>`;
+  }
+
+  if (item.dialog && item.dialog.length) {
+    html += `<h3>Диалог</h3>`;
+    html += `<div class="dialog">` + item.dialog.map(dialogLineToHtml).join('') + `</div>`;
+  }
+
+  if (item.note) {
+    html += `<p class="muted">${escapeHtml(item.note)}</p>`;
+  }
+
+  return html;
+}
+
 // ---- Рендер ----
 
 function render() {
@@ -252,8 +488,8 @@ function renderHome() {
       <div class="card">
         <h1>Italiano A0–A2</h1>
         <p>
-          Строгий режим урока: 5 сердец. Ошибки уменьшают XP.
-          Серия дней считается за прохождение урока.
+          Полный каркас курса. Строгий режим урока: 5 сердец.
+          Ошибки уменьшают XP. Серия дней считается за прохождение урока.
         </p>
       </div>
 
@@ -286,12 +522,15 @@ function renderHome() {
 }
 
 function lessonButton(lesson) {
-  const exists = Boolean(window.LESSONS && window.LESSONS[lesson.id]);
+  const exists = lessonExists(lesson.id);
   const unlocked = isLessonUnlocked(lesson.id);
   const done = state.completedLessons.includes(lesson.id);
+  const isCheckpoint = lesson.type === 'checkpoint';
+
+  const icon = isCheckpoint ? '🎯' : exists ? (done ? '✅' : '▶️') : '⏳';
 
   if (!exists) {
-    return `<button class="btn btn-disabled" disabled>⏳ ${escapeHtml(lesson.title)}</button>`;
+    return `<button class="btn btn-disabled" disabled>${icon} ${escapeHtml(lesson.title)}</button>`;
   }
 
   if (!unlocked) {
@@ -300,7 +539,7 @@ function lessonButton(lesson) {
 
   return `
     <button class="btn ${done ? 'btn-blue' : 'btn-green'}" data-open="${lesson.id}" type="button">
-      ${done ? '✅' : '▶️'} ${escapeHtml(lesson.title)}
+      ${icon} ${escapeHtml(lesson.title)}
     </button>
   `;
 }
@@ -324,9 +563,11 @@ function bindHome() {
 
   const importButton = document.querySelector('[data-import]');
   const importFile = document.getElementById('importFile');
+
   if (importButton && importFile) {
     importButton.addEventListener('click', () => importFile.click());
-    importFile.addEventListener('change', (event) => {
+
+    importFile.addEventListener('change', event => {
       const file = event.target.files && event.target.files[0];
       if (file) {
         importProgress(file);
@@ -362,7 +603,7 @@ function renderTheory() {
       </div>
 
       <div class="card theory">
-        ${item.html}
+        ${theoryItemToHtml(item)}
       </div>
 
       <button id="nextTheoryBtn" class="btn btn-green" type="button">
@@ -401,9 +642,10 @@ function renderExercise() {
         autocomplete="off"
         autocapitalize="off"
         spellcheck="false"
-        placeholder="Напиши по-итальянски"
+        placeholder="${escapeHtml(ex.placeholder || 'Напиши по-итальянски')}"
         value="${escapeHtml(lessonState.answer)}"
       >
+      ${ex.hint ? `<p class="muted">${escapeHtml(ex.hint)}</p>` : ''}
     `;
   }
 
@@ -441,6 +683,10 @@ function renderExercise() {
     `;
   }
 
+  if (ex.type === 'match') {
+    exerciseBody = renderMatchExercise(ex);
+  }
+
   const feedbackHtml = lessonState.feedback
     ? `
       <div class="feedback ${lessonState.feedback.ok ? 'good' : 'bad'}">
@@ -454,9 +700,17 @@ function renderExercise() {
   let actionHtml;
 
   if (lessonState.feedback) {
-    const label = (!lessonState.feedback.ok && lessonState.hearts <= 0)
-      ? 'Сердца закончились'
-      : 'Продолжить';
+    const matchIncomplete = ex.type === 'match' &&
+      lessonState.match &&
+      Object.keys(lessonState.match.matched).length < ex.pairs.length;
+
+    let label = 'Продолжить';
+
+    if (!lessonState.feedback.ok && lessonState.hearts <= 0) {
+      label = 'Сердца закончились';
+    } else if (matchIncomplete) {
+      label = 'Попробовать снова';
+    }
 
     actionHtml = `
       <button
@@ -466,6 +720,13 @@ function renderExercise() {
       >
         ${label}
       </button>
+    `;
+  } else if (ex.type === 'match') {
+    actionHtml = `
+      <div class="muted match-help">
+        Нажимай сначала элемент слева, затем подходящий вариант справа.
+        Ошибка стоит одного сердечка.
+      </div>
     `;
   } else {
     actionHtml = `
@@ -495,6 +756,54 @@ function renderExercise() {
 
       ${feedbackHtml}
       ${actionHtml}
+    </div>
+  `;
+}
+
+function renderMatchExercise(ex) {
+  const m = lessonState.match;
+
+  const leftHtml = ex.pairs.map(pair => {
+    const matched = m.matched[pair.left];
+    const selected = m.selectedLeft === pair.left;
+
+    return `
+      <button
+        type="button"
+        class="option match-left ${matched ? 'matched' : ''} ${selected ? 'selected' : ''}"
+        data-match-left="${escapeHtml(pair.left)}"
+        ${matched ? 'disabled' : ''}
+      >
+        ${escapeHtml(pair.left)}
+      </button>
+    `;
+  }).join('');
+
+  const rightHtml = m.right.map(right => {
+    const used = Object.values(m.matched).includes(right);
+
+    return `
+      <button
+        type="button"
+        class="option match-right ${used ? 'matched' : ''}"
+        data-match-right="${escapeHtml(right)}"
+        ${used ? 'disabled' : ''}
+      >
+        ${escapeHtml(right)}
+      </button>
+    `;
+  }).join('');
+
+  return `
+    <div class="match-columns">
+      <div class="match-col">
+        <h3>Слева</h3>
+        ${leftHtml}
+      </div>
+      <div class="match-col">
+        <h3>Справа</h3>
+        ${rightHtml}
+      </div>
     </div>
   `;
 }
@@ -548,6 +857,19 @@ function bindLesson() {
     });
   });
 
+  document.querySelectorAll('[data-match-left]').forEach(button => {
+    button.addEventListener('click', () => {
+      lessonState.match.selectedLeft = button.dataset.matchLeft;
+      render();
+    });
+  });
+
+  document.querySelectorAll('[data-match-right]').forEach(button => {
+    button.addEventListener('click', () => {
+      handleMatchRight(button.dataset.matchRight);
+    });
+  });
+
   const checkButton = document.getElementById('checkBtn');
   if (checkButton) {
     checkButton.addEventListener('click', checkAnswer);
@@ -559,12 +881,61 @@ function bindLesson() {
   }
 }
 
-function startLesson(id, push) {
-  if (!window.LESSONS || !window.LESSONS[id]) {
+function handleMatchRight(right) {
+  if (!lessonState.match || !lessonState.match.selectedLeft) {
     return;
   }
 
-  currentLesson = window.LESSONS[id];
+  const ex = currentLesson.exercises[lessonState.exerciseIndex];
+  const selectedLeft = lessonState.match.selectedLeft;
+  const pair = ex.pairs.find(item => item.left === selectedLeft);
+
+  if (!pair) {
+    lessonState.match.selectedLeft = null;
+    render();
+    return;
+  }
+
+  if (pair.right === right) {
+    lessonState.match.matched[selectedLeft] = right;
+    lessonState.match.selectedLeft = null;
+
+    if (Object.keys(lessonState.match.matched).length === ex.pairs.length) {
+      lessonState.feedback = {
+        ok: true,
+        text: ex.explain || 'Все пары соединены верно!'
+      };
+    }
+  } else {
+    lessonState.hearts = Math.max(0, lessonState.hearts - 1);
+    lessonState.mistakes += 1;
+    lessonState.match.selectedLeft = null;
+
+    const wrongText = ex.explainWrong || 'Неверная пара. Попробуй ещё раз.';
+    const extra = ex.explain ? ` ${ex.explain}` : '';
+
+    lessonState.feedback = {
+      ok: false,
+      text: (wrongText + extra).trim()
+    };
+  }
+
+  render();
+}
+
+function startLesson(id, push) {
+  if (!lessonExists(id)) {
+    return;
+  }
+
+  const data = window.LESSONS[id];
+  const meta = findLessonMeta(id);
+
+  currentLesson = {
+    ...data,
+    title: data.title || (meta && meta.title) || 'Урок',
+    xp: data.xp || (meta && meta.xp) || (meta && meta.type === 'checkpoint' ? 50 : 20)
+  };
 
   lessonState = {
     phase: 'theory',
@@ -575,7 +946,8 @@ function startLesson(id, push) {
     feedback: null,
     answer: '',
     buildIndexes: [],
-    currentOptions: []
+    currentOptions: [],
+    match: null
   };
 
   view = { name: 'lesson' };
@@ -591,6 +963,7 @@ function openLesson(id) {
   if (!isLessonAvailable(id)) {
     return;
   }
+
   startLesson(id, true);
 }
 
@@ -613,11 +986,20 @@ function loadExercise() {
   lessonState.feedback = null;
   lessonState.answer = '';
   lessonState.buildIndexes = [];
+  lessonState.match = null;
 
   if (ex.type === 'choice') {
     lessonState.currentOptions = shuffle(ex.options);
   } else {
     lessonState.currentOptions = [];
+  }
+
+  if (ex.type === 'match') {
+    lessonState.match = {
+      right: shuffle(ex.pairs.map(pair => pair.right)),
+      matched: {},
+      selectedLeft: null
+    };
   }
 }
 
@@ -712,6 +1094,18 @@ function continueAfterFeedback() {
     view = { name: 'failed' };
     render();
     return;
+  }
+
+  const ex = currentLesson.exercises[lessonState.exerciseIndex];
+
+  if (ex.type === 'match' && lessonState.match) {
+    const completed = Object.keys(lessonState.match.matched).length === ex.pairs.length;
+
+    if (!lessonState.feedback.ok && !completed) {
+      lessonState.feedback = null;
+      render();
+      return;
+    }
   }
 
   if (lessonState.exerciseIndex + 1 < currentLesson.exercises.length) {
