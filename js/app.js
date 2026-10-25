@@ -119,13 +119,13 @@ function normalize(text) {
     .replace(/\s+/g, ' ');
 }
 
-// ---- История браузера (чтобы работала системная стрелка «назад») ----
+// ---- История браузера (системная стрелка «назад») ----
 
 function pushHistoryLesson(id) {
   try {
     history.pushState({ page: 'lesson', lessonId: id }, '');
   } catch (e) {
-    // если браузер не дал — не страшно, кнопки всё равно работают
+    // ignore
   }
 }
 
@@ -153,6 +153,70 @@ window.addEventListener('popstate', function (event) {
     render();
   }
 });
+
+// ---- Экспорт / импорт прогресса ----
+
+function exportProgress() {
+  const payload = {
+    app: 'italiano-app',
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    state: state
+  };
+
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'italiano-progress-' + todayISO() + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  setTimeout(function () {
+    URL.revokeObjectURL(url);
+  }, 1000);
+}
+
+function importProgress(file) {
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    try {
+      const parsed = JSON.parse(reader.result);
+      const incoming = parsed && parsed.state ? parsed.state : parsed;
+
+      if (!incoming || typeof incoming !== 'object') {
+        alert('Файл не похож на сохранённый прогресс.');
+        return;
+      }
+
+      if (!confirm('Загрузить прогресс из файла? Текущий прогресс на этом устройстве будет заменён.')) {
+        return;
+      }
+
+      state = { ...defaultState(), ...incoming };
+
+      if (!Array.isArray(state.completedLessons)) {
+        state.completedLessons = [];
+      }
+      if (typeof state.xp !== 'number') {
+        state.xp = 0;
+      }
+      if (typeof state.streak !== 'number') {
+        state.streak = 0;
+      }
+
+      saveState();
+      render();
+      alert('Прогресс загружен! 🎉');
+    } catch (e) {
+      alert('Не удалось прочитать файл. Проверь, что это правильный файл экспорта.');
+    }
+  };
+
+  reader.readAsText(file);
+}
 
 // ---- Рендер ----
 
@@ -206,6 +270,14 @@ function renderHome() {
         </section>
       `).join('')}
 
+      <div class="card">
+        <h3>Резервные копии</h3>
+        <p class="muted">Сохрани прогресс в файл или загрузи его на другом устройстве.</p>
+        <button class="btn btn-blue" data-export type="button">💾 Экспорт прогресса</button>
+        <button class="btn btn-green" data-import type="button">📂 Импорт прогресса</button>
+        <input id="importFile" type="file" accept="application/json,.json" hidden>
+      </div>
+
       <button class="btn btn-disabled" data-reset type="button">
         Сбросить прогресс
       </button>
@@ -243,6 +315,24 @@ function bindHome() {
   const resetButton = document.querySelector('[data-reset]');
   if (resetButton) {
     resetButton.addEventListener('click', resetProgress);
+  }
+
+  const exportButton = document.querySelector('[data-export]');
+  if (exportButton) {
+    exportButton.addEventListener('click', exportProgress);
+  }
+
+  const importButton = document.querySelector('[data-import]');
+  const importFile = document.getElementById('importFile');
+  if (importButton && importFile) {
+    importButton.addEventListener('click', () => importFile.click());
+    importFile.addEventListener('change', (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (file) {
+        importProgress(file);
+      }
+      event.target.value = '';
+    });
   }
 }
 
@@ -745,8 +835,19 @@ function goHome() {
   render();
 }
 
+function hasLessonProgress() {
+  if (!lessonState) return false;
+  if (lessonState.phase === 'exercise') return true;
+  if (lessonState.theoryIndex > 0) return true;
+  return false;
+}
+
 function confirmExit() {
-  if (confirm('Выйти из урока? Прогресс этого урока не сохранится.')) {
+  if (hasLessonProgress()) {
+    if (confirm('Выйти из урока? Прогресс этого урока не сохранится.')) {
+      goBackToHome();
+    }
+  } else {
     goBackToHome();
   }
 }
@@ -759,8 +860,6 @@ function resetProgress() {
   }
 }
 
-// При загрузке страницы «сбрасываем» текущую запись истории на главную,
-// чтобы не было рассинхрона после перезагрузки посреди урока.
 try {
   history.replaceState(null, '');
 } catch (e) {
