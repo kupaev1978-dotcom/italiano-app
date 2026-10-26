@@ -1,4 +1,4 @@
-const CACHE_NAME = 'italiano-v9';
+const CACHE_NAME = 'italiano-v10';
 
 const CORE_ASSETS = [
   './index.html',
@@ -33,8 +33,11 @@ const CORE_ASSETS = [
   './data/lessons/a0-u3-l2.js',
   './data/lessons/a0-u3-l3.js',
   './data/lessons/a0-u3-l4.js',
-  './data/lessons/a0-u3-l5.js'
-
+  './data/lessons/a0-u3-l5.js',
+  './data/lessons/a0-u4-l0.js',
+  './data/lessons/a0-u4-l1.js',
+  './data/lessons/a0-u4-l2.js',
+  './data/lessons/a0-u4-l3.js'
 ];
 
 self.addEventListener('install', function (event) {
