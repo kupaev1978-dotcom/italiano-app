@@ -156,6 +156,62 @@ function normalize(text) {
     .replace(/\s+/g, ' ');
 }
 
+function gapPlainText(sentence, answer) {
+  return String(sentence || '').replace('___', String(answer || ''));
+}
+
+function renderGapSentence(sentence, answer) {
+  const safeSentence = escapeHtml(sentence || '');
+  const replacement = answer
+    ? `<span class="gap-filled">${escapeHtml(answer)}</span>`
+    : '<span class="gap-blank">___</span>';
+
+  return safeSentence.replace('___', replacement);
+}
+
+function renderTableExercise(ex) {
+  const headers = ex.headers || [];
+  const rows = ex.rows || [];
+  const targetRow = Number(ex.targetRow);
+  const targetColumn = Number(ex.targetColumn);
+  const selected = lessonState.answer || '';
+
+  let html = '<table class="theory-table exercise-table">';
+
+  if (headers.length) {
+    html += '<thead><tr>';
+    headers.forEach(header => {
+      html += `<th>${escapeHtml(header)}</th>`;
+    });
+    html += '</tr></thead>';
+  }
+
+  html += '<tbody>';
+
+  rows.forEach((row, rowIndex) => {
+    const cells = Array.isArray(row) ? row : [row];
+    html += '<tr>';
+
+    cells.forEach((cell, columnIndex) => {
+      const isTarget = rowIndex === targetRow && columnIndex === targetColumn;
+
+      if (isTarget) {
+        const value = selected ? escapeHtml(selected) : '___';
+        const filledClass = selected ? 'filled' : '';
+        html += `<td class="table-target ${filledClass}">${value}</td>`;
+      } else {
+        html += `<td>${escapeHtml(cell)}</td>`;
+      }
+    });
+
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+
+  return html;
+}
+
 // ---- История браузера ----
 
 function pushHistoryLesson(id) {
@@ -497,7 +553,7 @@ function renderHome() {
         <h1>Italiano A0–A2</h1>
         <p>
           Полный каркас курса. Строгий режим урока: 5 сердец.
-          Ошибки уменьшают XP. Серия дней считается за прохождение урока.
+          Ошибки уменьшают XP. Подсказка стоит 1 сердечко.
         </p>
       </div>
 
@@ -672,7 +728,7 @@ function renderExercise() {
         placeholder="${escapeHtml(ex.placeholder || 'Напиши по-итальянски')}"
         value="${escapeHtml(lessonState.answer)}"
       >
-      ${ex.hint ? `<p class="muted">${escapeHtml(ex.hint)}</p>` : ''}
+      ${ex.hint ? '' : ''}
     `;
   }
 
@@ -710,9 +766,95 @@ function renderExercise() {
     `;
   }
 
+  if (ex.type === 'gap') {
+    exerciseBody = `
+      <div class="gap-sentence">
+        ${renderGapSentence(ex.sentence, lessonState.answer)}
+      </div>
+    `;
+
+    if (Array.isArray(ex.options)) {
+      exerciseBody += `
+        <div class="options">
+          ${lessonState.currentOptions.map((option, index) => `
+            <button
+              type="button"
+              class="option ${lessonState.answer === option ? 'selected' : ''}"
+              data-choice="${index}"
+            >
+              ${escapeHtml(option)}
+            </button>
+          `).join('')}
+        </div>
+      `;
+    } else {
+      exerciseBody += `
+        <input
+          id="fillInput"
+          class="input"
+          type="text"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="${escapeHtml(ex.placeholder || 'Вставь пропущенное слово')}"
+          value="${escapeHtml(lessonState.answer)}"
+        >
+      `;
+    }
+  }
+
+  if (ex.type === 'table') {
+    exerciseBody = renderTableExercise(ex);
+
+    if (Array.isArray(ex.options)) {
+      exerciseBody += `
+        <div class="options">
+          ${lessonState.currentOptions.map((option, index) => `
+            <button
+              type="button"
+              class="option ${lessonState.answer === option ? 'selected' : ''}"
+              data-choice="${index}"
+            >
+              ${escapeHtml(option)}
+            </button>
+          `).join('')}
+        </div>
+      `;
+    } else {
+      exerciseBody += `
+        <input
+          id="fillInput"
+          class="input"
+          type="text"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="${escapeHtml(ex.placeholder || 'Впиши ответ')}"
+          value="${escapeHtml(lessonState.answer)}"
+        >
+      `;
+    }
+  }
+
   if (ex.type === 'match') {
     exerciseBody = renderMatchExercise(ex);
   }
+
+  const hintHtml = ex.hint && !lessonState.feedback
+    ? `
+      <div class="hint-area">
+        ${lessonState.hintShown ? `<div class="hint-box">💡 ${escapeHtml(ex.hint)}</div>` : ''}
+        <button
+          id="hintBtn"
+          class="btn-hint"
+          type="button"
+          ${lessonState.hintShown || lessonState.hearts <= 0 || ex.type === 'match' ? 'disabled' : ''}
+        >
+          ${lessonState.hintShown ? 'Подсказка использована' : 'Подсказка (-1 ❤️)'}
+        </button>
+      </div>
+    `
+    : '';
 
   const feedbackHtml = lessonState.feedback
     ? `
@@ -778,6 +920,7 @@ function renderExercise() {
 
       <div class="card">
         <h2>${escapeHtml(ex.question)}</h2>
+        ${hintHtml}
         ${exerciseBody}
       </div>
 
@@ -844,6 +987,11 @@ function bindLesson() {
   const nextTheoryButton = document.getElementById('nextTheoryBtn');
   if (nextTheoryButton) {
     nextTheoryButton.addEventListener('click', nextTheory);
+  }
+
+  const hintButton = document.getElementById('hintBtn');
+  if (hintButton) {
+    hintButton.addEventListener('click', useHint);
   }
 
   document.querySelectorAll('[data-choice]').forEach(button => {
@@ -950,6 +1098,26 @@ function handleMatchRight(right) {
   render();
 }
 
+function useHint() {
+  if (!currentLesson || !lessonState) return;
+
+  const ex = currentLesson.exercises[lessonState.exerciseIndex];
+
+  if (!ex || !ex.hint || lessonState.hintShown || lessonState.feedback) return;
+  if (ex.type === 'match') return;
+  if (lessonState.hearts <= 0) return;
+
+  lessonState.hearts = Math.max(0, lessonState.hearts - 1);
+  lessonState.mistakes += 1;
+  lessonState.hintShown = true;
+
+  if (lessonState.hearts <= 0) {
+    view = { name: 'failed' };
+  }
+
+  render();
+}
+
 function startLesson(id, push) {
   if (!lessonExists(id)) {
     return;
@@ -974,7 +1142,8 @@ function startLesson(id, push) {
     answer: '',
     buildIndexes: [],
     currentOptions: [],
-    match: null
+    match: null,
+    hintShown: false
   };
 
   view = { name: 'lesson' };
@@ -1014,8 +1183,14 @@ function loadExercise() {
   lessonState.answer = '';
   lessonState.buildIndexes = [];
   lessonState.match = null;
+  lessonState.hintShown = false;
 
-  if (ex.type === 'choice') {
+  const hasOptions =
+    ex.type === 'choice' ||
+    (ex.type === 'gap' && Array.isArray(ex.options)) ||
+    (ex.type === 'table' && Array.isArray(ex.options));
+
+  if (hasOptions) {
     lessonState.currentOptions = shuffle(ex.options);
   } else {
     lessonState.currentOptions = [];
@@ -1062,6 +1237,14 @@ function canCheckCurrent() {
     return lessonState.buildIndexes.length > 0;
   }
 
+  if (ex.type === 'gap' || ex.type === 'table') {
+    if (Array.isArray(ex.options)) {
+      return Boolean(lessonState.answer);
+    }
+
+    return Boolean(lessonState.answer.trim());
+  }
+
   return false;
 }
 
@@ -1094,6 +1277,60 @@ function checkAnswer() {
 
   if (ex.type === 'build') {
     ok = normalize(userAnswer) === normalize(ex.answer);
+  }
+
+  if (ex.type === 'gap') {
+    if (Array.isArray(ex.options)) {
+      ok = userAnswer === ex.answer;
+    } else {
+      const accepted = ex.accept || [ex.answer];
+      ok = accepted.some(item => normalize(item) === normalize(userAnswer));
+    }
+
+    if (ok) {
+      lessonState.feedback = {
+        ok: true,
+        text: ex.explain || `Правильно: ${gapPlainText(ex.sentence, ex.answer)}`
+      };
+    } else {
+      lessonState.hearts = Math.max(0, lessonState.hearts - 1);
+      lessonState.mistakes += 1;
+
+      lessonState.feedback = {
+        ok: false,
+        text: `Правильно: ${gapPlainText(ex.sentence, ex.answer)}. ${ex.explain || ''}`.trim()
+      };
+    }
+
+    render();
+    return;
+  }
+
+  if (ex.type === 'table') {
+    if (Array.isArray(ex.options)) {
+      ok = userAnswer === ex.answer;
+    } else {
+      const accepted = ex.accept || [ex.answer];
+      ok = accepted.some(item => normalize(item) === normalize(userAnswer));
+    }
+
+    if (ok) {
+      lessonState.feedback = {
+        ok: true,
+        text: ex.explain || 'Правильно!'
+      };
+    } else {
+      lessonState.hearts = Math.max(0, lessonState.hearts - 1);
+      lessonState.mistakes += 1;
+
+      lessonState.feedback = {
+        ok: false,
+        text: `Правильный ответ: ${ex.answer}. ${ex.explain || ''}`.trim()
+      };
+    }
+
+    render();
+    return;
   }
 
   if (ok) {
@@ -1221,7 +1458,7 @@ function renderFailed() {
       <div class="card">
         <h1>Сердца закончились 💔</h1>
         <p>
-          В строгом режиме 5 ошибок завершают урок.
+          В строгом режиме 5 ошибок или использованных подсказок завершают урок.
           Попробуй снова: сначала точность, потом скорость.
         </p>
       </div>
@@ -1240,7 +1477,7 @@ function renderFailed() {
 function bindFailed() {
   const homeButton = document.querySelector('[data-home]');
   if (homeButton) {
-    homeButton.addEventListener('click', goBackToHome);
+    homeButton.addEventListener('click', goHome);
   }
 
   const retryButton = document.querySelector('[data-retry]');
@@ -1259,11 +1496,8 @@ function goHome() {
 function hasLessonProgress() {
   if (!lessonState) return false;
 
-  // На теории терять нечего: прогресс урока пишется только в конце.
   if (lessonState.phase !== 'exercise') return false;
 
-  // В упражнениях считаем, что есть что терять, если уже было проверено
-  // хотя бы одно задание (перешёл дальше ИЛИ есть feedback по текущему).
   if (lessonState.exerciseIndex > 0) return true;
   if (lessonState.feedback) return true;
 
