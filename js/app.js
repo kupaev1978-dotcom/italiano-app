@@ -152,7 +152,7 @@ function normalize(text) {
   return String(text || '')
     .toLowerCase()
     .trim()
-    .replace(/[.,!?;:«»"']/g, '')
+    .replace(/[.,!?;:«»"'’‘]/g, '')
     .replace(/\s+/g, ' ');
 }
 
