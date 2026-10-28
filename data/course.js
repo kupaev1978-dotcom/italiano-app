@@ -64,14 +64,14 @@ window.COURSE = {
           id: 'A1-U1',
           title: 'Настоящее время и важные глаголы',
           lessons: [
-            { id: 'a1-u1-l1', title: 'Глаголы на -ARE, -ERE, -IRE в presente' },
+            { id: 'a1-u1-l1', title: 'Глаголы на -ERE и -IRE в presente' },
             { id: 'a1-u1-l2', title: 'Глаголы на -isc-: capire, finire, preferire' },
-            { id: 'a1-u1-l3', title: 'Andare, venire, stare, fare' },
-            { id: 'a1-u1-l4', title: 'Dire, bere, uscire, sapere, conoscere' },
-            { id: 'a1-u1-l5', title: 'Отрицание и вопросы в presente' },
-            { id: 'a1-u1-l6', title: 'Checkpoint: presente и базовые глаголы', type: 'checkpoint', xp: 60 }
+            { id: 'a1-u1-l3', title: 'Dire, bere, uscire, sapere, conoscere' },
+            { id: 'a1-u1-l4', title: 'Отрицание и вопросы в presente' },
+            { id: 'a1-u1-l5', title: 'Checkpoint: presente и важные глаголы', type: 'checkpoint', xp: 70 }
           ]
         },
+
         {
           id: 'A1-U2',
           title: 'Предлоги, город и направление',
