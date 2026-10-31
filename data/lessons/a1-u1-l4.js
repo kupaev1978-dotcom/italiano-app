@@ -11,7 +11,6 @@ window.LESSONS["a1-u1-l4"] = {
       summary: "В итальянском отрицание ставится перед глаголом. Это похоже на русское «не», но порядок слов фиксированный.",
       rule: [
         "Non + глагол: Non capisco. — Я не понимаю.",
-        "Non parlare! — Не говори! (императив будет позже, пока запомни форму)",
         "Они не говорят: Loro non parlano.",
         "Мы не знаем: Non sappiamo.",
         "Я не пью кофе: Non bevo caffè."
@@ -36,7 +35,7 @@ window.LESSONS["a1-u1-l4"] = {
       ],
       examples: [
         { it: "Non capisco la domanda.", ru: "Я не понимаю вопрос." },
-        { it: "Non wevo vino.", ru: "Я не пью вино.", note: "опечатка? правильно: Non bevo vino." },
+        { it: "Non bevo vino.", ru: "Я не пью вино." },
         { it: "Non sappiamo l'indirizzo.", ru: "Мы не знаем адрес." },
         { it: "Non vedo nessuno.", ru: "Я не вижу никого." },
         { it: "Non mangio niente.", ru: "Я ничего не ем." }
@@ -81,7 +80,7 @@ window.LESSONS["a1-u1-l4"] = {
         { who: "Anna", text: "Non vieni stasera?", ru: "Ты не придёшь сегодня вечером?" },
         { who: "Marco", text: "Sì, vengo! Alle otto.", ru: "Приду! В восемь." },
         { who: "Anna", text: "Non hai fame?", ru: "Ты не голоден?" },
-        { who: "Marco", text: "Sì, ho molta fame.", ru: "Нет, я очень голоден.", note: "по-итальянски буквально: Да, я имею большой голод." },
+        { who: "Marco", text: "Sì, ho molta fame.", ru: "Да, я очень голоден.", note: "Ловушка: на вопрос Non hai fame? итальянец отвечает Sì, если голоден. По-русски интуитивно хочется сказать «Нет», но по-итальянски это Sì." },
         { who: "Anna", text: "Allora mangiamo qualcosa.", ru: "Тогда давай что-нибудь съедим." }
       ]
     }
@@ -145,11 +144,11 @@ window.LESSONS["a1-u1-l4"] = {
     {
       type: "gap",
       question: "Выбери вопросительное слово",
-      sentence: "___ costi? (Сколько стоит?)",
+      sentence: "___ costa? (Сколько стоит?)",
       options: ["Quanto", "Dove", "Quando", "Perché"],
       answer: "Quanto",
       hint: "Сколько — quanto.",
-      explain: "Quanto costa? — Сколько стоит? (в вопросе costa без s, но в упражнении опечатка в sentence; правильно Quanto costa?)"
+      explain: "Quanto costa? — Сколько стоит?"
     },
     {
       type: "table",
