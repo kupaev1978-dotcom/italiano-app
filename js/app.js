@@ -169,6 +169,38 @@ function renderGapSentence(sentence, answer) {
   return safeSentence.replace('___', replacement);
 }
 
+function renderTable(table) {
+  if (!table) return '';
+
+  const headers = table.headers || [];
+  const rows = table.rows || [];
+
+  let html = `<table class="theory-table">`;
+
+  if (headers.length) {
+    html += `<thead><tr>`;
+    headers.forEach(header => {
+      html += `<th>${escapeHtml(header)}</th>`;
+    });
+    html += `</tr></thead>`;
+  }
+
+  html += `<tbody>`;
+
+  rows.forEach(row => {
+    const cells = Array.isArray(row) ? row : [row];
+    html += `<tr>`;
+    cells.forEach(cell => {
+      html += `<td>${escapeHtml(cell)}</td>`;
+    });
+    html += `</tr>`;
+  });
+
+  html += `</tbody></table>`;
+
+  return html;
+}
+
 function renderTableExercise(ex) {
   const headers = ex.headers || [];
   const rows = ex.rows || [];
@@ -212,111 +244,6 @@ function renderTableExercise(ex) {
   return html;
 }
 
-// ---- История браузера ----
-
-function pushHistoryLesson(id) {
-  try {
-    history.pushState({ page: 'lesson', lessonId: id }, '');
-  } catch (e) {
-    // ignore
-  }
-}
-
-function goBackToHome() {
-  try {
-    if (history.state && history.state.page === 'lesson') {
-      history.back();
-      return;
-    }
-  } catch (e) {
-    // ignore
-  }
-
-  goHome();
-}
-
-window.addEventListener('popstate', function (event) {
-  const st = event.state;
-
-  if (st && st.page === 'lesson' && lessonExists(st.lessonId)) {
-    startLesson(st.lessonId, false);
-  } else {
-    currentLesson = null;
-    lessonState = null;
-    view = { name: 'home' };
-    render();
-  }
-});
-
-// ---- Экспорт / импорт ----
-
-function exportProgress() {
-  const payload = {
-    app: 'italiano-app',
-    version: 1,
-    exportedAt: new Date().toISOString(),
-    state: state
-  };
-
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'italiano-progress-' + todayISO() + '.json';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  setTimeout(function () {
-    URL.revokeObjectURL(url);
-  }, 1000);
-}
-
-function importProgress(file) {
-  const reader = new FileReader();
-
-  reader.onload = function () {
-    try {
-      const parsed = JSON.parse(reader.result);
-      const incoming = parsed && parsed.state ? parsed.state : parsed;
-
-      if (!incoming || typeof incoming !== 'object') {
-        alert('Файл не похож на сохранённый прогресс.');
-        return;
-      }
-
-      if (!confirm('Загрузить прогресс из файла? Текущий прогресс на этом устройстве будет заменён.')) {
-        return;
-      }
-
-      state = { ...defaultState(), ...incoming };
-
-      if (!Array.isArray(state.completedLessons)) {
-        state.completedLessons = [];
-      }
-      if (typeof state.xp !== 'number') {
-        state.xp = 0;
-      }
-      if (typeof state.streak !== 'number') {
-        state.streak = 0;
-      }
-      if (typeof state.devMode !== 'boolean') {
-        state.devMode = false;
-      }
-
-      saveState();
-      render();
-      alert('Прогресс загружен! 🎉');
-    } catch (e) {
-      alert('Не удалось прочитать файл. Проверь, что это правильный файл экспорта.');
-    }
-  };
-
-  reader.readAsText(file);
-}
-
-// ---- Теория ----
-
 function contentToHtml(content) {
   if (!content) return '';
 
@@ -347,38 +274,6 @@ function contentToHtml(content) {
   }
 
   return '';
-}
-
-function renderTable(table) {
-  if (!table) return '';
-
-  const headers = table.headers || [];
-  const rows = table.rows || [];
-
-  let html = `<table class="theory-table">`;
-
-  if (headers.length) {
-    html += `<thead><tr>`;
-    headers.forEach(header => {
-      html += `<th>${escapeHtml(header)}</th>`;
-    });
-    html += `</tr></thead>`;
-  }
-
-  html += `<tbody>`;
-
-  rows.forEach(row => {
-    const cells = Array.isArray(row) ? row : [row];
-    html += `<tr>`;
-    cells.forEach(cell => {
-      html += `<td>${escapeHtml(cell)}</td>`;
-    });
-    html += `</tr>`;
-  });
-
-  html += `</tbody></table>`;
-
-  return html;
 }
 
 function tipToHtml(tip) {
@@ -518,7 +413,104 @@ function theoryItemToHtml(item) {
   return html;
 }
 
-// ---- Рендер ----
+function pushHistoryLesson(id) {
+  try {
+    history.pushState({ page: 'lesson', lessonId: id }, '');
+  } catch (e) {
+    // ignore
+  }
+}
+
+function goBackToHome() {
+  try {
+    if (history.state && history.state.page === 'lesson') {
+      history.back();
+      return;
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  goHome();
+}
+
+window.addEventListener('popstate', function (event) {
+  const st = event.state;
+
+  if (st && st.page === 'lesson' && lessonExists(st.lessonId)) {
+    startLesson(st.lessonId, false);
+  } else {
+    currentLesson = null;
+    lessonState = null;
+    view = { name: 'home' };
+    render();
+  }
+});
+
+function exportProgress() {
+  const payload = {
+    app: 'italiano-app',
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    state: state
+  };
+
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'italiano-progress-' + todayISO() + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  setTimeout(function () {
+    URL.revokeObjectURL(url);
+  }, 1000);
+}
+
+function importProgress(file) {
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    try {
+      const parsed = JSON.parse(reader.result);
+      const incoming = parsed && parsed.state ? parsed.state : parsed;
+
+      if (!incoming || typeof incoming !== 'object') {
+        alert('Файл не похож на сохранённый прогресс.');
+        return;
+      }
+
+      if (!confirm('Загрузить прогресс из файла? Текущий прогресс на этом устройстве будет заменён.')) {
+        return;
+      }
+
+      state = { ...defaultState(), ...incoming };
+
+      if (!Array.isArray(state.completedLessons)) {
+        state.completedLessons = [];
+      }
+      if (typeof state.xp !== 'number') {
+        state.xp = 0;
+      }
+      if (typeof state.streak !== 'number') {
+        state.streak = 0;
+      }
+      if (typeof state.devMode !== 'boolean') {
+        state.devMode = false;
+      }
+
+      saveState();
+      render();
+      alert('Прогресс загружен! 🎉');
+    } catch (e) {
+      alert('Не удалось прочитать файл. Проверь, что это правильный файл экспорта.');
+    }
+  };
+
+  reader.readAsText(file);
+}
 
 function render() {
   if (!app) return;
@@ -539,6 +531,18 @@ function render() {
 }
 
 function renderHome() {
+  if (!window.COURSE) {
+    app.innerHTML = `
+      <div class="container">
+        <div class="card">
+          <h1>Ошибка загрузки курса</h1>
+          <p>Не найден файл <code>data/course.js</code> или в нём нет <code>window.COURSE</code>.</p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
   const lessons = getAllLessons();
 
   app.innerHTML = `
@@ -674,7 +678,22 @@ function renderLesson() {
 }
 
 function renderTheory() {
+  if (!currentLesson.theory || !currentLesson.theory.length) {
+    lessonState.phase = 'exercise';
+    loadExercise();
+    renderExercise();
+    return;
+  }
+
   const item = currentLesson.theory[lessonState.theoryIndex];
+
+  if (!item) {
+    lessonState.phase = 'exercise';
+    loadExercise();
+    renderExercise();
+    return;
+  }
+
   const isLast = lessonState.theoryIndex === currentLesson.theory.length - 1;
 
   app.innerHTML = `
@@ -697,7 +716,20 @@ function renderTheory() {
 }
 
 function renderExercise() {
+  if (!currentLesson.exercises || !currentLesson.exercises.length) {
+    completeLesson();
+    render();
+    return;
+  }
+
   const ex = currentLesson.exercises[lessonState.exerciseIndex];
+
+  if (!ex) {
+    completeLesson();
+    render();
+    return;
+  }
+
   let exerciseBody = '';
 
   if (ex.type === 'choice') {
@@ -728,7 +760,6 @@ function renderExercise() {
         placeholder="${escapeHtml(ex.placeholder || 'Напиши по-итальянски')}"
         value="${escapeHtml(lessonState.answer)}"
       >
-      ${ex.hint ? '' : ''}
     `;
   }
 
@@ -840,6 +871,18 @@ function renderExercise() {
     exerciseBody = renderMatchExercise(ex);
   }
 
+  if (ex.type === 'dialog-choice') {
+    exerciseBody = renderDialogChoiceExercise(ex);
+  }
+
+  if (ex.type === 'error-choice') {
+    exerciseBody = renderErrorChoiceExercise(ex);
+  }
+
+  if (!exerciseBody) {
+    exerciseBody = `<p class="muted">Неизвестный тип упражнения: ${escapeHtml(ex.type || 'без типа')}</p>`;
+  }
+
   const hintHtml = ex.hint && !lessonState.feedback
     ? `
       <div class="hint-area">
@@ -871,6 +914,7 @@ function renderExercise() {
   if (lessonState.feedback) {
     const matchIncomplete = ex.type === 'match' &&
       lessonState.match &&
+      Array.isArray(ex.pairs) &&
       Object.keys(lessonState.match.matched).length < ex.pairs.length;
 
     let label = 'Продолжить';
@@ -931,6 +975,10 @@ function renderExercise() {
 }
 
 function renderMatchExercise(ex) {
+  if (!lessonState.match || !Array.isArray(ex.pairs)) {
+    return '<p class="muted">Нет пар для соединения.</p>';
+  }
+
   const m = lessonState.match;
 
   const leftHtml = ex.pairs.map(pair => {
@@ -976,6 +1024,69 @@ function renderMatchExercise(ex) {
       </div>
     </div>
   `;
+}
+
+function renderDialogChoiceExercise(ex) {
+  const dialogHtml = Array.isArray(ex.dialog) && ex.dialog.length
+    ? `<div class="dialog-context">` + ex.dialog.map(dialogLineToHtml).join('') + `</div>`
+    : '';
+
+  const optionsHtml = `
+    <div class="options">
+      ${lessonState.currentOptions.map((option, index) => `
+        <button
+          type="button"
+          class="option ${lessonState.answer === option ? 'selected' : ''}"
+          data-choice="${index}"
+        >
+          ${escapeHtml(option)}
+        </button>
+      `).join('')}
+    </div>
+  `;
+
+  return dialogHtml + optionsHtml;
+}
+
+function renderErrorChoiceExercise(ex) {
+  if (Array.isArray(ex.tokens) && ex.tokens.length) {
+    const tokensHtml = ex.tokens.map((token, index) => {
+      const id = token.id || String(index);
+      const selected = String(lessonState.answer) === String(id);
+
+      return `
+        <button
+          type="button"
+          class="error-token ${selected ? 'selected' : ''}"
+          data-error-token="${escapeHtml(id)}"
+        >
+          ${escapeHtml(token.text)}
+        </button>
+      `;
+    }).join(' ');
+
+    return `<div class="error-sentence">${tokensHtml}</div>`;
+  }
+
+  const sentenceHtml = ex.sentence
+    ? `<div class="error-sentence-plain">${escapeHtml(ex.sentence)}</div>`
+    : '';
+
+  const optionsHtml = `
+    <div class="options">
+      ${lessonState.currentOptions.map((option, index) => `
+        <button
+          type="button"
+          class="option ${lessonState.answer === option ? 'selected' : ''}"
+          data-choice="${index}"
+        >
+          ${escapeHtml(option)}
+        </button>
+      `).join('')}
+    </div>
+  `;
+
+  return sentenceHtml + optionsHtml;
 }
 
 function bindLesson() {
@@ -1045,6 +1156,13 @@ function bindLesson() {
     });
   });
 
+  document.querySelectorAll('[data-error-token]').forEach(button => {
+    button.addEventListener('click', () => {
+      lessonState.answer = button.dataset.errorToken;
+      render();
+    });
+  });
+
   const checkButton = document.getElementById('checkBtn');
   if (checkButton) {
     checkButton.addEventListener('click', checkAnswer);
@@ -1062,6 +1180,11 @@ function handleMatchRight(right) {
   }
 
   const ex = currentLesson.exercises[lessonState.exerciseIndex];
+
+  if (!ex || !Array.isArray(ex.pairs)) {
+    return;
+  }
+
   const selectedLeft = lessonState.match.selectedLeft;
   const pair = ex.pairs.find(item => item.left === selectedLeft);
 
@@ -1126,10 +1249,18 @@ function startLesson(id, push) {
   const data = window.LESSONS[id];
   const meta = findLessonMeta(id);
 
+  const theory = Array.isArray(data.theory)
+    ? data.theory
+    : (data.html ? [{ html: data.html }] : []);
+
+  const exercises = Array.isArray(data.exercises) ? data.exercises : [];
+
   currentLesson = {
-    ...data,
+    id: data.id || id,
     title: data.title || (meta && meta.title) || 'Урок',
-    xp: data.xp || (meta && meta.xp) || (meta && meta.type === 'checkpoint' ? 50 : 20)
+    xp: data.xp || (meta && meta.xp) || (meta && meta.type === 'checkpoint' ? 50 : 20),
+    theory,
+    exercises
   };
 
   lessonState = {
@@ -1169,8 +1300,12 @@ function nextTheory() {
   if (lessonState.theoryIndex < currentLesson.theory.length - 1) {
     lessonState.theoryIndex += 1;
   } else {
-    lessonState.phase = 'exercise';
-    loadExercise();
+    if (currentLesson.exercises.length) {
+      lessonState.phase = 'exercise';
+      loadExercise();
+    } else {
+      completeLesson();
+    }
   }
 
   render();
@@ -1178,6 +1313,8 @@ function nextTheory() {
 
 function loadExercise() {
   const ex = currentLesson.exercises[lessonState.exerciseIndex];
+
+  if (!ex) return;
 
   lessonState.feedback = null;
   lessonState.answer = '';
@@ -1187,18 +1324,20 @@ function loadExercise() {
 
   const hasOptions =
     ex.type === 'choice' ||
+    ex.type === 'dialog-choice' ||
+    (ex.type === 'error-choice' && !Array.isArray(ex.tokens)) ||
     (ex.type === 'gap' && Array.isArray(ex.options)) ||
     (ex.type === 'table' && Array.isArray(ex.options));
 
   if (hasOptions) {
-    lessonState.currentOptions = shuffle(ex.options);
+    lessonState.currentOptions = shuffle(ex.options || []);
   } else {
     lessonState.currentOptions = [];
   }
 
   if (ex.type === 'match') {
     lessonState.match = {
-      right: shuffle(ex.pairs.map(pair => pair.right)),
+      right: shuffle((ex.pairs || []).map(pair => pair.right)),
       matched: {},
       selectedLeft: null
     };
@@ -1225,7 +1364,7 @@ function canCheckCurrent() {
 
   if (!ex) return false;
 
-  if (ex.type === 'choice') {
+  if (ex.type === 'choice' || ex.type === 'dialog-choice' || ex.type === 'error-choice') {
     return Boolean(lessonState.answer);
   }
 
@@ -1262,35 +1401,18 @@ function getCurrentUserAnswer() {
 
 function checkAnswer() {
   const ex = currentLesson.exercises[lessonState.exerciseIndex];
+
+  if (!ex) return;
+
   const userAnswer = getCurrentUserAnswer();
 
-  let ok = false;
-
-  if (ex.type === 'choice') {
-    ok = userAnswer === ex.answer;
-  }
-
-  if (ex.type === 'fill') {
-    const accepted = ex.accept || [ex.answer];
-    ok = accepted.some(item => normalize(item) === normalize(userAnswer));
-  }
-
-  if (ex.type === 'build') {
-    ok = normalize(userAnswer) === normalize(ex.answer);
-  }
-
-  if (ex.type === 'gap') {
-    if (Array.isArray(ex.options)) {
-      ok = userAnswer === ex.answer;
-    } else {
-      const accepted = ex.accept || [ex.answer];
-      ok = accepted.some(item => normalize(item) === normalize(userAnswer));
-    }
+  if (ex.type === 'choice' || ex.type === 'dialog-choice') {
+    const ok = userAnswer === ex.answer;
 
     if (ok) {
       lessonState.feedback = {
         ok: true,
-        text: ex.explain || `Правильно: ${gapPlainText(ex.sentence, ex.answer)}`
+        text: ex.explain || 'Правильно!'
       };
     } else {
       lessonState.hearts = Math.max(0, lessonState.hearts - 1);
@@ -1298,7 +1420,133 @@ function checkAnswer() {
 
       lessonState.feedback = {
         ok: false,
-        text: `Правильно: ${gapPlainText(ex.sentence, ex.answer)}. ${ex.explain || ''}`.trim()
+        text: `Правильный ответ: ${ex.answer}. ${ex.explain || ''}`.trim()
+      };
+    }
+
+    render();
+    return;
+  }
+
+  if (ex.type === 'error-choice' && Array.isArray(ex.tokens) && ex.tokens.length) {
+    const ok = String(lessonState.answer) === String(ex.answer);
+
+    if (ok) {
+      lessonState.feedback = {
+        ok: true,
+        text: ex.explain || 'Правильно, нашёл ошибку.'
+      };
+    } else {
+      lessonState.hearts = Math.max(0, lessonState.hearts - 1);
+      lessonState.mistakes += 1;
+
+      const correctToken = ex.tokens.find((token, index) => {
+        return String(token.id || index) === String(ex.answer);
+      });
+
+      const correctText = correctToken ? correctToken.text : String(ex.answer);
+
+      lessonState.feedback = {
+        ok: false,
+        text: `Ошибка в слове: ${correctText}. ${ex.explain || ''}`.trim()
+      };
+    }
+
+    render();
+    return;
+  }
+
+  if (ex.type === 'error-choice') {
+    const ok = userAnswer === ex.answer;
+
+    if (ok) {
+      lessonState.feedback = {
+        ok: true,
+        text: ex.explain || 'Правильно, нашёл ошибку.'
+      };
+    } else {
+      lessonState.hearts = Math.max(0, lessonState.hearts - 1);
+      lessonState.mistakes += 1;
+
+      lessonState.feedback = {
+        ok: false,
+        text: `Правильный ответ: ${ex.answer}. ${ex.explain || ''}`.trim()
+      };
+    }
+
+    render();
+    return;
+  }
+
+  if (ex.type === 'fill') {
+    const accepted = ex.accept || [ex.answer];
+    const ok = accepted.some(item => normalize(item) === normalize(userAnswer));
+
+    if (ok) {
+      lessonState.feedback = {
+        ok: true,
+        text: ex.explain || 'Правильно!'
+      };
+    } else {
+      lessonState.hearts = Math.max(0, lessonState.hearts - 1);
+      lessonState.mistakes += 1;
+
+      lessonState.feedback = {
+        ok: false,
+        text: `Правильный ответ: ${ex.answer}. ${ex.explain || ''}`.trim()
+      };
+    }
+
+    render();
+    return;
+  }
+
+  if (ex.type === 'build') {
+    const ok = normalize(userAnswer) === normalize(ex.answer);
+
+    if (ok) {
+      lessonState.feedback = {
+        ok: true,
+        text: ex.explain || 'Правильно!'
+      };
+    } else {
+      lessonState.hearts = Math.max(0, lessonState.hearts - 1);
+      lessonState.mistakes += 1;
+
+      lessonState.feedback = {
+        ok: false,
+        text: `Правильный ответ: ${ex.answer}. ${ex.explain || ''}`.trim()
+      };
+    }
+
+    render();
+    return;
+  }
+
+  if (ex.type === 'gap') {
+    let ok = false;
+
+    if (Array.isArray(ex.options)) {
+      ok = userAnswer === ex.answer;
+    } else {
+      const accepted = ex.accept || [ex.answer];
+      ok = accepted.some(item => normalize(item) === normalize(userAnswer));
+    }
+
+    const full = gapPlainText(ex.sentence, ex.answer);
+
+    if (ok) {
+      lessonState.feedback = {
+        ok: true,
+        text: ex.explain || `Правильно: ${full}`
+      };
+    } else {
+      lessonState.hearts = Math.max(0, lessonState.hearts - 1);
+      lessonState.mistakes += 1;
+
+      lessonState.feedback = {
+        ok: false,
+        text: `Правильно: ${full}. ${ex.explain || ''}`.trim()
       };
     }
 
@@ -1307,6 +1555,8 @@ function checkAnswer() {
   }
 
   if (ex.type === 'table') {
+    let ok = false;
+
     if (Array.isArray(ex.options)) {
       ok = userAnswer === ex.answer;
     } else {
@@ -1333,20 +1583,10 @@ function checkAnswer() {
     return;
   }
 
-  if (ok) {
-    lessonState.feedback = {
-      ok: true,
-      text: ex.explain || 'Правильно!'
-    };
-  } else {
-    lessonState.hearts = Math.max(0, lessonState.hearts - 1);
-    lessonState.mistakes += 1;
-
-    lessonState.feedback = {
-      ok: false,
-      text: `Правильный ответ: ${ex.answer}. ${ex.explain || ''}`.trim()
-    };
-  }
+  lessonState.feedback = {
+    ok: false,
+    text: 'Неизвестный тип упражнения.'
+  };
 
   render();
 }
@@ -1362,7 +1602,7 @@ function continueAfterFeedback() {
 
   const ex = currentLesson.exercises[lessonState.exerciseIndex];
 
-  if (ex.type === 'match' && lessonState.match) {
+  if (ex.type === 'match' && lessonState.match && Array.isArray(ex.pairs)) {
     const completed = Object.keys(lessonState.match.matched).length === ex.pairs.length;
 
     if (!lessonState.feedback.ok && !completed) {
@@ -1383,6 +1623,8 @@ function continueAfterFeedback() {
 }
 
 function completeLesson() {
+  if (!currentLesson || !lessonState) return;
+
   const alreadyCompleted = state.completedLessons.includes(currentLesson.id);
 
   const baseXp = currentLesson.xp || 20;
@@ -1500,6 +1742,7 @@ function hasLessonProgress() {
 
   if (lessonState.exerciseIndex > 0) return true;
   if (lessonState.feedback) return true;
+  if (lessonState.hintShown) return true;
 
   return false;
 }
