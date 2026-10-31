@@ -69,19 +69,6 @@ window.LESSONS["a0-u4-l3"] = {
           ["ci sono", "множественное число", "Ci sono due camere."]
         ]
       },
-      rule2: [
-        "Полезные слова про дом:",
-        "la casa — дом",
-        "la cucina — кухня",
-        "il bagno — ванная, туалет",
-        "la camera — комната, спальня",
-        "il soggiorno — гостиная",
-        "il tavolo — стол",
-        "la sedia — стул",
-        "il letto — кровать",
-        "la porta — дверь",
-        "la finestra — окно"
-      ],
       tips: [
         "Секрет: если сомневаешься, посчитай предметы. Один — c’è. Два и больше — ci sono.",
         "C’è часто используется с неопределённым артиклем: c’è un libro, c’è una sedia. Ci sono тоже: ci sono due libri, ci sono tre sedie."
@@ -102,6 +89,50 @@ window.LESSONS["a0-u4-l3"] = {
         { who: "Anna", text: "È grande. C’è una cucina e ci sono tre camere.", ru: "Он большой. Есть кухня и три комнаты." },
         { who: "Luca", text: "C’è un giardino?", ru: "Есть сад?" },
         { who: "Anna", text: "No, non c’è.", ru: "Нет, нет." }
+      ]
+    },
+    {
+      title: "Полезные слова про дом: комнаты и мебель",
+      summary: "Эти слова нужны, чтобы описать жильё и понять вопросы про дом. Запоминай каждое сразу с артиклем.",
+      rule: [
+        "la casa — дом",
+        "la cucina — кухня",
+        "il bagno — ванная, туалет",
+        "la camera — комната, спальня",
+        "il soggiorno — гостиная",
+        "il tavolo — стол",
+        "la sedia — стул",
+        "il letto — кровать",
+        "la porta — дверь",
+        "la finestra — окно",
+        "il giardino — сад",
+        "il garage — гараж"
+      ],
+      table: {
+        headers: ["Мужской род", "Женский род"],
+        rows: [
+          ["il bagno", "la cucina"],
+          ["il soggiorno", "la camera"],
+          ["il tavolo", "la sedia"],
+          ["il letto", "la porta"],
+          ["il giardino", "la finestra"],
+          ["il garage", "la casa"]
+        ]
+      },
+      tips: [
+        "Секрет: слова на -a в основном женского рода (cucina, camera, sedia, porta, finestra, casa), но есть и мужские на -o (bagno, soggiorno, tavolo, letto, giardino, garage). Артикль решает.",
+        "La casa — это и «дом» как здание, и «дом» как жилище. Sono a casa = я дома."
+      ],
+      mistakes: [
+        "Не говори il cucina. Правильно: la cucina.",
+        "Не говори la bagno. Правильно: il bagno.",
+        "Не путай camera (комната/спальня) и cucina (кухня) — звучат похоже, но значения разные."
+      ],
+      examples: [
+        { it: "La cucina è grande.", ru: "Кухня большая." },
+        { it: "Il bagno è piccolo.", ru: "Ванная маленькая." },
+        { it: "C’è un tavolo in cucina.", ru: "На кухне есть стол." },
+        { it: "La finestra è aperta.", ru: "Окно открыто." }
       ]
     }
   ],
