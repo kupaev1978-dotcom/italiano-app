@@ -92,7 +92,7 @@ window.LESSONS["a1-u2-l1"] = {
       dialog: [
         { who: "Anna", text: "Dove vai?", ru: "Куда ты идёшь?" },
         { who: "Marco", text: "Vado in centro. Tu?", ru: "Иду в центр. А ты?" },
-        { who: "Anna", text: "Vengo da casa di mia madre.", ru: "Я coming from my mother's house." },
+        { who: "Anna", text: "Vengo da casa di mia madre.", ru: "Я прихожу из дома мамы." },
         { who: "Marco", text: "Allora ci vediamo tra un'ora.", ru: "Тогда увидимся через час." }
       ]
     }
