@@ -1,4 +1,4 @@
-const CACHE_NAME = 'italiano-v13';
+const CACHE_NAME = 'italiano-v15';
 
 const CORE_ASSETS = [
   './index.html',
