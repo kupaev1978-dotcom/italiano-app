@@ -7,14 +7,12 @@ window.LESSONS["a1-u1-l3"] = {
   xp: 40,
   theory: [
     {
-      title: "Пять глаголов, которые нужны каждый день",
-      summary: "Dire, bere, uscire, sapere, conoscere — очень частотные глаголы. Некоторые из них неправильные, поэтому формы лучше запомнить целиком.",
+      title: "Dire, bere, uscire: говорить, пить, выходить",
+      summary: "Три частотных неправильных глагола. Формы лучше запомнить целиком, потому что они не следуют регулярной схеме.",
       rule: [
         "dire — говорить, сказать: dico, dici, dice, diciamo, dite, dicono.",
         "bere — пить: bevo, bevi, beve, beviamo, bevete, bevono.",
-        "uscire — выходить, выходить из дома: esco, esci, esce, usciamo, uscite, escono.",
-        "sapere — знать факт, уметь: so, sai, sa, sappiamo, sapete, sanno.",
-        "conoscere — знать человека/место, быть знакомым: conosco, conosci, conosce, conosciamo, conoscete, conoscono."
+        "uscire — выходить, выходить из дома: esco, esci, esce, usciamo, uscite, escono."
       ],
       table: {
         headers: ["Лицо", "dire", "bere", "uscire"],
@@ -27,7 +25,30 @@ window.LESSONS["a1-u1-l3"] = {
           ["loro", "dicono", "bevono", "escono"]
         ]
       },
-      table2: {
+      tips: [
+        "Секрет про uscire: тут чередуются stem esc- и usc-. Короткие формы: esco, esci, esce, escono. Длинные noi/voi: usciamo, uscite.",
+        "Секрет про dire: форма voi — dite, без -ci, как можно было бы ожидать по аналогии с diciamo."
+      ],
+      mistakes: [
+        "Не говори io bebo. Правильно: io bevo.",
+        "Не говори loro escano. Правильно: loro escono.",
+        "Не путай vado и esco: vado = иду/еду (andare), esco = выхожу (uscire)."
+      ],
+      examples: [
+        { it: "Cosa dici?", ru: "Что ты говоришь?" },
+        { it: "Bevo acqua.", ru: "Я пью воду." },
+        { it: "Esco alle otto.", ru: "Я выхожу в восемь." },
+        { it: "Noi usciamo insieme.", ru: "Мы выходим вместе." }
+      ]
+    },
+    {
+      title: "Sapere e conoscere: знать по-двум different",
+      summary: "Два глагола «знать», которые русскоговорящие постоянно путают. Запомни их формы и логику — и половина путаницы уйдёт.",
+      rule: [
+        "sapere — знать факт, уметь: so, sai, sa, sappiamo, sapete, sanno.",
+        "conoscere — знать человека/место, быть знакомым: conosco, conosci, conosce, conosciamo, conoscete, conoscono."
+      ],
+      table: {
         headers: ["Лицо", "sapere", "conoscere"],
         rows: [
           ["io", "so", "conosco"],
@@ -39,22 +60,19 @@ window.LESSONS["a1-u1-l3"] = {
         ]
       },
       tips: [
-        "Секрет про uscire: тут чередуются stem esc- и usc-. Короткие формы: esco, esci, esce, escono. Длинные noi/voi: usciamo, uscite.",
         "Секрет про sapere: формы очень короткие: so, sai, sa, sanno. Запомни их как отдельный блок, они встречаются постоянно.",
         "Секрет про conoscere: это не глагол на -isc-, хотя в io есть -sc-. Он ведёт себя как обычный -ERE: conosco, conosci, conosce, conosciamo, conoscete, conoscono."
       ],
       mistakes: [
-        "Не говори io bebo. Правильно: io bevo.",
-        "Не говори loro escano. Правильно: loro escono.",
         "Не говори noi sappiano. Правильно: noi sappiamo.",
-        "Не путай so и conosco: so la verità — я знаю правду; conosco Marco — я знаком с Марко."
+        "Не говори *conisciamo. Правильно: conosciamo.",
+        "Не переводи механически: «я знаю плавать» по-русски неправильно, но по-итальянски So nuotare — нормально. Это значение «уметь»."
       ],
       examples: [
-        { it: "Cosa dici?", ru: "Что ты говоришь?" },
-        { it: "Bevo acqua.", ru: "Я пью воду." },
-        { it: "Esco alle otto.", ru: "Я выхожу в восемь." },
         { it: "So la risposta.", ru: "Я знаю ответ." },
-        { it: "Conosco questa città.", ru: "Я знаю этот город." }
+        { it: "Conosco questa città.", ru: "Я знаю этот город." },
+        { it: "So nuotare.", ru: "Я умею плавать." },
+        { it: "Conosco Marco.", ru: "Я знаком с Марко." }
       ]
     },
     {
@@ -80,7 +98,7 @@ window.LESSONS["a1-u1-l3"] = {
       },
       tips: [
         "Простая проверка: если после глагола идёт инфинитив — почти всегда sapere: So parlare italiano. Если идёт имя человека или города — чаще conoscere: Conosco Luca. Conosco Milano.",
-        "Не переводи механически: «я знаю плавать» по-русски неправильно, но по-итальянски So nuotare — нормально. Это значение «уметь»."
+        "Не переводи дословно: «я знаю этот фильм» = Conosco questo film, а не So questo film."
       ],
       mistakes: [
         "Не говори *Conosco nuotare. Правильно: So nuotare.",
