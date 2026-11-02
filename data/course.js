@@ -125,6 +125,19 @@ window.COURSE = {
             { id: "a1-u5-l5", title: "Preposizioni di tempo: a, in, di, alle, da...a" },
             { id: "a1-u5-l6", title: "Checkpoint: время, дни, распоряд и частота", type: "checkpoint", xp: 70 }
           ]
+        },
+
+        {
+          id: "A1-U6",
+          title: "A1-U6 — Здоровье, погода, чувства и советы",
+          lessons: [
+            { id: "a1-u6-l1", title: "Части тела и первые жалобы" },
+            { id: "a1-u6-l2", title: "Боль, врач и простые рекомендации" },
+            { id: "a1-u6-l3", title: "Il tempo: погода" },
+            { id: "a1-u6-l4", title: "Sentimenti e stati d'animo: чувства и состояния" },
+            { id: "a1-u6-l5", title: "Consigli: советы и рекомендации" },
+            { id: "a1-u6-l6", title: "Checkpoint: здоровье, погода, чувства и советы", type: "checkpoint", xp: 60 }
+          ]
         }
       ]
     },
