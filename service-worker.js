@@ -1,4 +1,4 @@
-const CACHE_NAME = 'italiano-v17';
+const CACHE_NAME = 'italiano-v18';
 
 const CORE_ASSETS = [
   './index.html',
@@ -66,9 +66,15 @@ const CORE_ASSETS = [
   './data/lessons/a1-u4-l3.js',
   './data/lessons/a1-u4-l4.js',
   './data/lessons/a1-u4-l5.js',
-  './data/lessons/a1-u4-l6.js'
-];
+  './data/lessons/a1-u4-l6.js',
 
+  './data/lessons/a1-u5-l1.js',
+  './data/lessons/a1-u5-l2.js',
+  './data/lessons/a1-u5-l3.js',
+  './data/lessons/a1-u5-l4.js',
+  './data/lessons/a1-u5-l5.js',
+  './data/lessons/a1-u5-l6.js'
+];
 self.addEventListener('install', function (event) {
   event.waitUntil(
     (async function () {
