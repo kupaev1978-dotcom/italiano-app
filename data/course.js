@@ -37,7 +37,7 @@ window.COURSE = {
           lessons: [
             { id: "a0-u3-l0", title: "Мужской и женский род существительных" },
             { id: "a0-u3-l1", title: "Множественное число существительных" },
-            { id: "a0-u3-l2", title: "Неопределённые артикли: un, uno, una, un'" },
+            { id: "a0-u3-l2", title: "Неопределённые артикли: un, uno, una" },
             { id: "a0-u3-l3", title: "Определённые артикли: il, lo, l', la, i, gli, le" },
             { id: "a0-u3-l4", title: "Артикли в жизни: бар, дом, город" },
             { id: "a0-u3-l5", title: "Checkpoint: род, число и артикли", type: "checkpoint", xp: 60 }
@@ -137,6 +137,19 @@ window.COURSE = {
             { id: "a1-u6-l4", title: "Sentimenti e stati d'animo: чувства и состояния" },
             { id: "a1-u6-l5", title: "Consigli: советы и рекомендации" },
             { id: "a1-u6-l6", title: "Checkpoint: здоровье, погода, чувства и советы", type: "checkpoint", xp: 60 }
+          ]
+        },
+
+        {
+          id: "A1-U7",
+          title: "A1-U7 — Будущее, планы, путешествия и союзы",
+          lessons: [
+            { id: "a1-u7-l1", title: "Futuro semplice: andrò, farò, vedrò" },
+            { id: "a1-u7-l2", title: "Progetti e piani: presente e futuro" },
+            { id: "a1-u7-l3", title: "In viaggio: aeroporto, hotel e biglietti" },
+            { id: "a1-u7-l4", title: "Perché, quando, se: причины, время и условие" },
+            { id: "a1-u7-l5", title: "Richieste gentili: vorrei, posso, mi può" },
+            { id: "a1-u7-l6", title: "Checkpoint: будущее, планы и путешествия", type: "checkpoint", xp: 70 }
           ]
         }
       ]
