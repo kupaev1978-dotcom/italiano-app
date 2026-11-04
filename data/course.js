@@ -151,6 +151,19 @@ window.COURSE = {
             { id: "a1-u7-l5", title: "Richieste gentili: vorrei, posso, mi può" },
             { id: "a1-u7-l6", title: "Checkpoint: будущее, планы и путешествия", type: "checkpoint", xp: 70 }
           ]
+        },
+
+        {
+          id: "A1-U8",
+          title: "A1-U8 — Passato prossimo: рассказ о прошлом",
+          lessons: [
+            { id: "a1-u8-l1", title: "Passato prossimo con avere" },
+            { id: "a1-u8-l2", title: "Passato prossimo con essere" },
+            { id: "a1-u8-l3", title: "Participi passati irregolari" },
+            { id: "a1-u8-l4", title: "Маркеры прошлого: ieri, fa, già, non...ancora, mai" },
+            { id: "a1-u8-l5", title: "Raccontare il weekend, un viaggio e la giornata" },
+            { id: "a1-u8-l6", title: "Checkpoint: passato prossimo", type: "checkpoint", xp: 70 }
+          ]
         }
       ]
     },
