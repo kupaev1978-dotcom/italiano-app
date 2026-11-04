@@ -2,20 +2,20 @@ window.LESSONS = window.LESSONS || {};
 
 window.LESSONS["a1-u9-l2"] = {
   id: "a1-u9-l2",
-  title: "Citta, trasporti e viaggi: диалоги и ошибки",
+  title: "Città, trasporti e viaggi: диалоги и ошибки",
   level: "A1",
   xp: 40,
   theory: [
     {
       title: "Предлоги места и направления",
-      summary: "Для города и транспорта важны готовые блоки: a Roma, in Italia, in centro, alla stazione, dal medico, a piedi, in autobus.",
+      summary: "Per città e trasporti servono blocchi pronti: a Roma, in Italia, in centro, alla stazione, dal medico, a piedi, in autobus.",
       rule: [
-        "a + город: vado a Roma, abito a Milano.",
-        "in + страна: vivo in Italia, vado in Francia.",
-        "in + центр/транспорт: in centro, in autobus, in treno, in aereo.",
-        "a + пешком: a piedi.",
-        "da + человек/профессионал: dal medico, dal parrucchiere.",
-        "alle + часы: alle otto, alle tredici."
+        "a + città: vado a Roma, abito a Milano.",
+        "in + paese: vivo in Italia, vado in Francia.",
+        "in + centro/mezzi: in centro, in autobus, in treno, in aereo.",
+        "a + piedi: a piedi.",
+        "da + persona/professionista: dal medico, dal parrucchiere.",
+        "alle + ore: alle otto, alle tredici."
       ],
       table: {
         headers: ["Фраза", "Значение"],
@@ -29,7 +29,7 @@ window.LESSONS["a1-u9-l2"] = {
         ]
       },
       tips: [
-        "Секрет: город - a, страна - in. Это одно из самых важных различий.",
+        "Секрет: città usa a, paese usa in. Questa è una delle differenze più importanti.",
         "Секрет: alla stazione = a + la stazione. All'aeroporto = a + l'aeroporto."
       ],
       mistakes: [
@@ -45,43 +45,43 @@ window.LESSONS["a1-u9-l2"] = {
       ]
     },
     {
-      title: "Фразы для путешествий",
-      summary: "В поездке нужны вежливые шаблоны: Vorrei..., Posso..., Mi puo...? Quanto costa? A che ora parte?",
+      title: "Фразы per viaggiare",
+      summary: "In viaggio servono modelli gentili: Vorrei..., Posso..., Mi può...? Quanto costa? A che ora parte?",
       rule: [
         "Vorrei un biglietto per Roma. - Я хотел бы билет до Рима.",
         "Posso pagare con la carta? - Можно заплатить картой?",
-        "Mi puo indicare la stazione? - Вы можете указать мне вокзал?",
+        "Mi può indicare la stazione? - Вы можете указать мне вокзал?",
         "A che ora parte il treno? - Во сколько отправляется поезд?",
-        "Dov'e l'uscita? - Где выход?",
+        "Dov'è l'uscita? - Где выход?",
         "Ho perso la valigia. - Я потерял чемодан."
       ],
       table: {
         headers: ["Ситуация", "Фраза"],
         rows: [
-          ["купить билет", "Vorrei un biglietto per..."],
-          ["спросить время отправления", "A che ora parte...?"],
-          ["спросить дорогу", "Scusi, come arrivo a...?"],
-          ["попросить помощь", "Mi puo aiutare, per favore?"],
-          ["потерять багаж", "Ho perso la valigia."]
+          ["comprare un biglietto", "Vorrei un biglietto per..."],
+          ["chiedere l'orario", "A che ora parte...?"],
+          ["chiedere la strada", "Scusi, come arrivo a...?"],
+          ["chiedere aiuto", "Mi può aiutare, per favore?"],
+          ["bagaglio perduto", "Ho perso la valigia."]
         ]
       },
       tips: [
-        "Секрет: Come arrivo a...? - очень универсальная фраза: Как мне добраться до...?",
-        "Секрет: Vorrei звучит вежливее, чем voglio."
+        "Секрет: Come arrivo a...? è una frase universale: Как мне добраться до...?",
+        "Секрет: Vorrei è più gentile di voglio."
       ],
       mistakes: [
         "Не говори: Voglio biglietto. Правильно: Vorrei un biglietto.",
-        "Не говори: Mi puo aiuta. Правильно: Mi puo aiutare.",
-        "Не говори: A che ora va il treno? Лучше: A che ora parte il treno?"
+        "Не говори: Mi può aiuta. Правильно: Mi può aiutare.",
+        "Не говори: A che ora va il treno? Meglio: A che ora parte il treno?"
       ],
       examples: [
         { it: "Scusi, come arrivo all'aeroporto?", ru: "Извините, как мне добраться до аэропорта?" },
         { it: "Vorrei una camera doppia.", ru: "Я хотел бы двухместный номер." },
         { it: "Il volo parte alle dieci.", ru: "Рейс отправляется в десять." },
-        { it: "Dov'e il ritiro bagagli?", ru: "Где получение багажа?" }
+        { it: "Dov'è il ritiro bagagli?", ru: "Где получение багажа?" }
       ],
       dialog: [
-        { who: "Turista", text: "Scusi, mi puo indicare la stazione?", ru: "Извините, вы можете указать мне вокзал?" },
+        { who: "Turista", text: "Scusi, mi può indicare la stazione?", ru: "Извините, вы можете указать мне вокзал?" },
         { who: "Passante", text: "Certo. Vada dritto e giri a destra.", ru: "Конечно. Идите прямо и поверните направо." },
         { who: "Turista", text: "Grazie mille!", ru: "Огромное спасибо!" }
       ]
@@ -106,7 +106,7 @@ window.LESSONS["a1-u9-l2"] = {
         { text: "Roma", id: "2" }
       ],
       answer: "wrong",
-      hint: "С городом используется a.",
+      hint: "Con le città si usa a.",
       explain: "Правильно: Vado a Roma."
     },
     {
@@ -117,12 +117,12 @@ window.LESSONS["a1-u9-l2"] = {
       ],
       options: [
         "Vada dritto e giri a destra.",
-        "Vorrei un caffe.",
+        "Vorrei un caffè.",
         "Ho perso la valigia.",
         "Il conto, per favore."
       ],
       answer: "Vada dritto e giri a destra.",
-      hint: "Нужен маршрут.",
+      hint: "Serve un'indicazione stradale.",
       explain: "Vada dritto e giri a destra - идите прямо и поверните направо."
     },
     {
@@ -135,7 +135,7 @@ window.LESSONS["a1-u9-l2"] = {
         { left: "a piedi", right: "пешком" },
         { left: "in autobus", right: "на автобусе" }
       ],
-      explain: "Это базовые городские выражения.",
+      explain: "Queste sono espressioni di base per la città.",
       explainWrong: "Неверная пара. Stazione = вокзал, centro = центр, medico = врач, piedi = пешком, autobus = автобус."
     },
     {
@@ -143,8 +143,8 @@ window.LESSONS["a1-u9-l2"] = {
       question: "Заполни фразу",
       headers: ["Ситуация", "Фраза"],
       rows: [
-        ["спросить дорогу", "Scusi, come arrivo...?"],
-        ["попросить билет", ""]
+        ["chiedere la strada", "Scusi, come arrivo...?"],
+        ["chiedere un biglietto", ""]
       ],
       targetRow: 1,
       targetColumn: 1,
@@ -177,7 +177,7 @@ window.LESSONS["a1-u9-l2"] = {
       question: "Собери фразу: «Поезд отправляется в восемь»",
       words: ["Il", "treno", "parte", "alle", "otto"],
       answer: "Il treno parte alle otto",
-      hint: "Parte + alle + часы.",
+      hint: "Parte + alle + ore.",
       explain: "Il treno parte alle otto - поезд отправляется в восемь."
     },
     {
@@ -190,7 +190,7 @@ window.LESSONS["a1-u9-l2"] = {
         "Cammino piede."
       ],
       answer: "Vado a piedi.",
-      hint: "Устойчивое выражение: a piedi.",
+      hint: "Espressione fissa: a piedi.",
       explain: "Vado a piedi - я иду пешком."
     },
     {
@@ -199,7 +199,7 @@ window.LESSONS["a1-u9-l2"] = {
       sentence: "Abito a Italia.",
       options: ["Abito", "a", "Italia"],
       answer: "a",
-      hint: "Со странами используется in.",
+      hint: "Con i paesi si usa in.",
       explain: "Правильно: Abito in Italia."
     },
     {
