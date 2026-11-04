@@ -23,31 +23,31 @@ window.LESSONS["a1-u9-l1"] = {
         ]
       },
       tips: [
-        "Секрет: если есть маркер времени, сначала определи его. Ieri почти всегда требует passato prossimo. Domani может требовать presente для плана или futuro для решения.",
+        "Секрет: если есть маркер времени, сначала определи его. Ieri почти всегда требует passato prossimo. Domani может требовать presente для плана или futuro per decisione.",
         "Самые важные глаголы: andare, fare, vedere, potere, dovere, volere, avere, essere."
       ],
       mistakes: [
         "Не говори: Ieri vado al cinema. Правильно: Ieri sono andato al cinema.",
-        "Не говори: Domani andai a Roma. Правильно: Domani vado a Roma или Domani andro a Roma.",
-        "Не говори: Ho andato. С andare используется essere: Sono andato."
+        "Не говори: Domani andai a Roma. Правильно: Domani vado a Roma или Domani andrò a Roma.",
+        "Не говори: Ho andato. Con andare si usa essere: Sono andato."
       ],
       examples: [
         { it: "Oggi studio italiano.", ru: "Сегодня я учу итальянский." },
         { it: "Ieri ho studiato italiano.", ru: "Вчера я учил итальянский." },
-        { it: "Domani studiero italiano.", ru: "Завтра я буду учить итальянский." },
+        { it: "Domani studierò italiano.", ru: "Завтра я буду учить итальянский." },
         { it: "Sabato sono andato al mare.", ru: "В субботу я ездил на море." }
       ]
     },
     {
       title: "Passato prossimo: avere o essere?",
-      summary: "Большинство глаголов использует avere. Глаголы движения, изменения состояния и возвратные глаголы используют essere. С essere participio согласуется с подлежащим.",
+      summary: "Большинство глаголов использует avere. Глаголы движения, изменения состояния и возвратные глаголы используют essere. Con essere il participio si accorda con il soggetto.",
       rule: [
         "avere + participio: ho mangiato, hai bevuto, ha dormito, abbiamo parlato, avete comprato, hanno visto.",
-        "essere + participio: sono andato / andata, sei partito / partita, e rimasto / rimasta, siamo usciti / uscite, siete tornati / tornate, sono arrivati / arrivate.",
+        "essere + participio: sono andato / andata, sei partito / partita, è rimasto / rimasta, siamo usciti / uscite, siete tornati / tornate, sono arrivati / arrivate.",
         "Глаголы с essere: andare, venire, partire, arrivare, entrare, uscire, tornare, restare, nascere, morire, diventare, svegliarsi, alzarsi, lavarsi, vestirsi."
       ],
       table: {
-        headers: ["Глагол", "Вспомогательный глагол", "Пример"],
+        headers: ["Глагол", "Ausiliare", "Пример"],
         rows: [
           ["mangiare", "avere", "Ho mangiato una pizza."],
           ["vedere", "avere", "Ho visto un film."],
@@ -57,11 +57,11 @@ window.LESSONS["a1-u9-l1"] = {
         ]
       },
       tips: [
-        "Секрет: если действие переходит на объект - есть, пить, смотреть, читать, покупать - почти всегда avere.",
-        "Секрет: если субъект сам перемещается или меняет состояние - часто essere."
+        "Секрет: если действие переходит на объект - mangiare, bere, guardare, leggere, comprare - quasi sempre avere.",
+        "Секрет: если субъект сам движется или меняет состояние - spesso essere."
       ],
       mistakes: [
-        "Не говори: Maria e andato. Правильно: Maria e andata.",
+        "Не говори: Maria è andato. Правильно: Maria è andata.",
         "Не говори: Noi siamo mangiato. Правильно: Noi abbiamo mangiato.",
         "Не говори: Ho partito. Правильно: Sono partito."
       ],
@@ -86,21 +86,21 @@ window.LESSONS["a1-u9-l1"] = {
       options: [
         "Ieri ho mangiato una pizza.",
         "Ieri mangio una pizza.",
-        "Ieri mangero una pizza.",
+        "Ieri mangerò una pizza.",
         "Ieri sono mangiato una pizza."
       ],
       answer: "Ieri ho mangiato una pizza.",
-      hint: "Mangiare требует avere.",
+      hint: "Mangiare richiede avere.",
       explain: "Ieri ho mangiato una pizza - вчера я ел пиццу."
     },
     {
       type: "gap",
       question: "Вставь правильную форму",
       sentence: "Domani ___ a Roma.",
-      options: ["andro", "andai", "andaro", "ho andato"],
-      answer: "andro",
-      hint: "Futuro di andare per io e andro.",
-      explain: "Domani andro a Roma - завтра я поеду в Рим."
+      options: ["andrò", "andai", "andaro", "ho andato"],
+      answer: "andrò",
+      hint: "Futuro di andare per io è andrò.",
+      explain: "Domani andrò a Roma - завтра я поеду в Рим."
     },
     {
       type: "table",
@@ -108,14 +108,14 @@ window.LESSONS["a1-u9-l1"] = {
       headers: ["Фраза", "Tempo"],
       rows: [
         ["Ieri ho lavorato.", "passato prossimo"],
-        ["Domani lavorero.", ""]
+        ["Domani lavorerò.", ""]
       ],
       targetRow: 1,
       targetColumn: 1,
       options: ["futuro semplice", "presente", "passato prossimo", "imperfetto"],
       answer: "futuro semplice",
-      hint: "Lavorero - futuro.",
-      explain: "Domani lavorero - завтра я буду работать."
+      hint: "Lavorerò è futuro.",
+      explain: "Domani lavorerò - завтра я буду работать."
     },
     {
       type: "match",
@@ -123,12 +123,12 @@ window.LESSONS["a1-u9-l1"] = {
       pairs: [
         { left: "parlo", right: "я говорю" },
         { left: "ho parlato", right: "я говорил" },
-        { left: "parlero", right: "я буду говорить" },
+        { left: "parlerò", right: "я буду говорить" },
         { left: "sono andato", right: "я пошёл" },
-        { left: "andro", right: "я пойду" }
+        { left: "andrò", right: "я пойду" }
       ],
-      explain: "Это три главных времени A1.",
-      explainWrong: "Неверная пара. Помни: parlo presente, ho parlato passato, parlero futuro."
+      explain: "Questi sono i tre tempi principali di A1.",
+      explainWrong: "Неверная пара. Ricorda: parlo presente, ho parlato passato, parlerò futuro."
     },
     {
       type: "error-choice",
@@ -140,7 +140,7 @@ window.LESSONS["a1-u9-l1"] = {
         { text: "cinema", id: "3" }
       ],
       answer: "wrong",
-      hint: "С ieri нужен passato prossimo.",
+      hint: "Con ieri serve il passato prossimo.",
       explain: "Правильно: Ieri sono andato al cinema."
     },
     {
@@ -152,26 +152,26 @@ window.LESSONS["a1-u9-l1"] = {
       options: [
         "Ho visto un film.",
         "Vedo un film.",
-        "Vedro un film.",
+        "Vedrò un film.",
         "Vado al cinema."
       ],
       answer: "Ho visto un film.",
-      hint: "Вопрос в passato prossimo.",
+      hint: "La domanda è al passato prossimo.",
       explain: "Ho visto un film - я смотрел фильм."
     },
     {
       type: "fill",
       question: "Напиши «Завтра я буду работать»",
-      answer: "Domani lavorero",
+      answer: "Domani lavorerò",
       accept: [
-        "Domani lavorero",
-        "domani lavorero",
-        "Lavorero domani",
-        "lavorero domani"
+        "Domani lavorerò",
+        "domani lavorerò",
+        "Lavorerò domani",
+        "lavorerò domani"
       ],
       placeholder: "Напиши по-итальянски",
-      hint: "Lavorare -> lavorero.",
-      explain: "Domani lavorero - завтра я буду работать."
+      hint: "Lavorare diventa lavorerò.",
+      explain: "Domani lavorerò - завтра я буду работать."
     },
     {
       type: "build",
@@ -187,11 +187,11 @@ window.LESSONS["a1-u9-l1"] = {
       options: [
         "Oggi lavoro.",
         "Ieri ho lavorato.",
-        "Domani lavorero.",
-        "Ieri lavorero."
+        "Domani lavorerò.",
+        "Ieri lavorerò."
       ],
-      answer: "Ieri lavorero.",
-      hint: "Ieri требует прошедшее время.",
+      answer: "Ieri lavorerò.",
+      hint: "Ieri richiede il passato.",
       explain: "Правильно: Ieri ho lavorato."
     },
     {
@@ -207,7 +207,7 @@ window.LESSONS["a1-u9-l1"] = {
       options: ["avere", "essere", "fare", "andare"],
       answer: "avere",
       hint: "Mangiare usa avere.",
-      explain: "mangiare -> ho mangiato."
+      explain: "mangiare diventa ho mangiato."
     }
   ]
 };
