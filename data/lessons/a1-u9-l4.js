@@ -8,9 +8,9 @@ window.LESSONS["a1-u9-l4"] = {
   theory: [
     {
       title: "Итоговый тест A1",
-      summary: "Здесь собраны главные темы A1: времена, предлоги, путешествия, люди, еда, здоровье, покупки, чувства и союзы.",
+      summary: "Qui sono raccolte le tematiche principali di A1: tempi, preposizioni, viaggi, persone, cibo, salute, shopping, sentimenti e congiunzioni.",
       rule: [
-        "Presente: oggi, di solito, domani для плана.",
+        "Presente: oggi, di solito, domani per un piano.",
         "Passato prossimo: ieri, due giorni fa, la settimana scorsa, l'anno scorso.",
         "Futuro semplice: domani, la settimana prossima, l'anno prossimo.",
         "Avere o essere nel passato: ho mangiato / sono andato.",
@@ -19,14 +19,14 @@ window.LESSONS["a1-u9-l4"] = {
         "Ho fame / sete / sonno / paura.",
         "Mi fa male / mi fanno male.",
         "Quanto costa? / Quanto costano?",
-        "Perche, quando, se, pero, quindi."
+        "Perché, quando, se, però, quindi."
       ],
       tips: [
-        "Перед ответом определи маркер времени: ieri, domani, oggi.",
-        "Для места спроси себя: город, страна, транспорт, человек или часы?",
-        "Для piace/costa посчитай предмет: один или несколько?"
+        "Prima di rispondere, identifica l'avverbio di tempo: ieri, domani, oggi.",
+        "Per il luogo chiediti: città, paese, mezzo, persona o ore?",
+        "Per piace/costa conta il nome: uno o più?"
       ],
-      note: "После этого checkpoint можно переходить к A2-U1: passato imperfetto."
+      note: "Dopo questo checkpoint puoi passare a A2-U1: passato imperfetto."
     }
   ],
   exercises: [
@@ -34,7 +34,7 @@ window.LESSONS["a1-u9-l4"] = {
       type: "gap",
       question: "Вставь правильную форму",
       sentence: "Ieri ___ al cinema.",
-      options: ["sono andato", "vado", "andro", "andai"],
+      options: ["sono andato", "vado", "andrò", "andai"],
       answer: "sono andato",
       hint: "Ieri + andare = sono andato.",
       explain: "Ieri sono andato al cinema - вчера я ходил в кино."
@@ -71,13 +71,13 @@ window.LESSONS["a1-u9-l4"] = {
       type: "dialog-choice",
       question: "Выбери ответ",
       dialog: [
-        { who: "Anna", text: "Hai gia mangiato?" },
+        { who: "Anna", text: "Hai già mangiato?" },
         { who: "Marco", text: "No, ..." }
       ],
       options: [
         "non ho ancora mangiato.",
-        "ho gia mangiato.",
-        "mangio gia.",
+        "ho già mangiato.",
+        "mangio già.",
         "non mangio mai."
       ],
       answer: "non ho ancora mangiato.",
@@ -88,36 +88,36 @@ window.LESSONS["a1-u9-l4"] = {
       type: "match",
       question: "Соедини союз и перевод",
       pairs: [
-        { left: "perche", right: "потому что" },
+        { left: "perché", right: "потому что" },
         { left: "quando", right: "когда" },
         { left: "se", right: "если" },
-        { left: "pero", right: "но" },
+        { left: "però", right: "но" },
         { left: "quindi", right: "поэтому" }
       ],
-      explain: "Эти союзы делают речь связной.",
-      explainWrong: "Неверная пара. Perche = потому что, quando = когда, se = если, pero = но, quindi = поэтому."
+      explain: "Queste congiunzioni rendono il discorso connesso.",
+      explainWrong: "Неверная пара. Perché = потому что, quando = когда, se = если, però = но, quindi = поэтому."
     },
     {
       type: "fill",
       question: "Напиши «Мне нравится кофе»",
-      answer: "Mi piace il caffe",
+      answer: "Mi piace il caffè",
       accept: [
-        "Mi piace il caffe",
-        "mi piace il caffe",
-        "A me piace il caffe",
-        "a me piace il caffe"
+        "Mi piace il caffè",
+        "mi piace il caffè",
+        "A me piace il caffè",
+        "a me piace il caffè"
       ],
       placeholder: "Напиши по-итальянски",
-      hint: "Caffe - единственное число: piace.",
-      explain: "Mi piace il caffe - мне нравится кофе."
+      hint: "Caffè è singolare: piace.",
+      explain: "Mi piace il caffè - мне нравится кофе."
     },
     {
       type: "build",
       question: "Собери фразу: «Завтра я поеду в Милан»",
-      words: ["Domani", "andro", "a", "Milano"],
-      answer: "Domani andro a Milano",
-      hint: "Domani + andro + a + город.",
-      explain: "Domani andro a Milano - завтра я поеду в Милан."
+      words: ["Domani", "andrò", "a", "Milano"],
+      answer: "Domani andrò a Milano",
+      hint: "Domani + andrò + a + città.",
+      explain: "Domani andrò a Milano - завтра я поеду в Милан."
     },
     {
       type: "choice",
@@ -138,7 +138,7 @@ window.LESSONS["a1-u9-l4"] = {
       sentence: "Mi piacciono la pizza.",
       options: ["Mi", "piacciono", "la", "pizza"],
       answer: "piacciono",
-      hint: "Pizza - единственное число.",
+      hint: "Pizza è singolare.",
       explain: "Правильно: Mi piace la pizza."
     },
     {
@@ -146,8 +146,8 @@ window.LESSONS["a1-u9-l4"] = {
       question: "Заполни тему",
       headers: ["Тема", "Фраза"],
       rows: [
-        ["погода", "Piove."],
-        ["здоровье", ""]
+        ["tempo atmosferico", "Piove."],
+        ["salute", ""]
       ],
       targetRow: 1,
       targetColumn: 1,
@@ -158,23 +158,23 @@ window.LESSONS["a1-u9-l4"] = {
         "Costa poco."
       ],
       answer: "Ho la febbre.",
-      hint: "Здоровье: симптомы через ho.",
+      hint: "Salute: sintomi con ho.",
       explain: "Ho la febbre - у меня температура."
     },
     {
       type: "dialog-choice",
       question: "Выбери ответ",
       dialog: [
-        { who: "Turista", text: "Scusi, mi puo indicare l'uscita?" }
+        { who: "Turista", text: "Scusi, mi può indicare l'uscita?" }
       ],
       options: [
         "Certo, vada dritto.",
-        "Vorrei un caffe.",
+        "Vorrei un caffè.",
         "Ho mal di testa.",
         "Il conto, per favore."
       ],
       answer: "Certo, vada dritto.",
-      hint: "Вежливая просьба указать выход.",
+      hint: "Richiesta gentile per l'uscita.",
       explain: "Certo, vada dritto - Конечно, идите прямо."
     },
     {
@@ -187,7 +187,7 @@ window.LESSONS["a1-u9-l4"] = {
         { left: "il biglietto", right: "билет" },
         { left: "l'aeroporto", right: "аэропорт" }
       ],
-      explain: "Это слова для путешествий.",
+      explain: "Queste sono parole per viaggiare.",
       explainWrong: "Неверная пара. Reception = ресепшн, volo = рейс, valigia = чемодан, biglietto = билет, aeroporto = аэропорт."
     },
     {
@@ -196,7 +196,7 @@ window.LESSONS["a1-u9-l4"] = {
       sentence: "Se piove, ___ a casa.",
       options: ["resto", "resterò", "restai", "restare"],
       answer: "resto",
-      hint: "На A1 после se для реального условия часто используется presente.",
+      hint: "A A1 dopo se per una condizione reale si usa spesso il presente.",
       explain: "Se piove, resto a casa - если идёт дождь, я остаюсь дома."
     },
     {
@@ -204,14 +204,14 @@ window.LESSONS["a1-u9-l4"] = {
       question: "Найди ошибку",
       tokens: [
         { text: "Maria", id: "0" },
-        { text: "e", id: "1" },
+        { text: "è", id: "1" },
         { text: "andato", id: "wrong" },
         { text: "a", id: "3" },
         { text: "casa", id: "4" }
       ],
       answer: "wrong",
-      hint: "Maria - женский род.",
-      explain: "Правильно: Maria e andata a casa."
+      hint: "Maria è femminile.",
+      explain: "Правильно: Maria è andata a casa."
     },
     {
       type: "table",
@@ -225,29 +225,29 @@ window.LESSONS["a1-u9-l4"] = {
       targetColumn: 1,
       options: ["futuro", "passato", "presente", "imperfetto"],
       answer: "futuro",
-      hint: "Domani относится к будущему.",
-      explain: "Domani обычно требует futuro или presente для плана."
+      hint: "Domani si riferisce al futuro.",
+      explain: "Domani richiede di solito futuro o presente per un piano."
     },
     {
       type: "build",
       question: "Собери фразу: «Я хотел бы забронировать номер»",
       words: ["Vorrei", "prenotare", "una", "camera"],
       answer: "Vorrei prenotare una camera",
-      hint: "Vorrei + инфинитив.",
+      hint: "Vorrei + infinito.",
       explain: "Vorrei prenotare una camera - я хотел бы забронировать номер."
     },
     {
       type: "choice",
       question: "Какая фраза самая вежливая?",
       options: [
-        "Vorrei un caffe, per favore.",
-        "Voglio caffe.",
-        "Dammi caffe.",
-        "Caffe!"
+        "Vorrei un caffè, per favore.",
+        "Voglio caffè.",
+        "Dammi caffè.",
+        "Caffè!"
       ],
-      answer: "Vorrei un caffe, per favore.",
+      answer: "Vorrei un caffè, per favore.",
       hint: "Vorrei + per favore.",
-      explain: "Vorrei un caffe, per favore - я хотел бы кофе, пожалуйста."
+      explain: "Vorrei un caffè, per favore - я хотел бы кофе, пожалуйста."
     },
     {
       type: "match",
@@ -259,7 +259,7 @@ window.LESSONS["a1-u9-l4"] = {
         { left: "ho sonno", right: "я хочу спать" },
         { left: "mi sento bene", right: "я хорошо себя чувствую" }
       ],
-      explain: "Это базовые состояния.",
+      explain: "Questi sono stati di base.",
       explainWrong: "Неверная пара. Stanco = устал, paura = страх, contento = рад, sonno = сон, sento bene = чувствую себя хорошо."
     }
   ]
