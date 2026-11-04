@@ -25,7 +25,7 @@ window.COURSE = {
             { id: "a0-u2-l1", title: "Глагол essere" },
             { id: "a0-u2-l2", title: "Глагол avere" },
             { id: "a0-u1-l3", title: "Страны и национальности" },
-            { id: "a0-u2-l5", title: "Вопросительные слова: chi, che, dove, quando, come, perche, quanto" },
+            { id: "a0-u2-l5", title: "Вопросительные слова: chi, che, dove, quando, come, perché, quanto" },
             { id: "a0-u2-l6", title: "Мини-диалоги: знакомство в жизни" },
             { id: "a0-u2-l7", title: "Checkpoint: essere, avere, вопросы и знакомство", type: "checkpoint", xp: 50 }
           ]
@@ -37,8 +37,8 @@ window.COURSE = {
           lessons: [
             { id: "a0-u3-l0", title: "Мужской и женский род существительных" },
             { id: "a0-u3-l1", title: "Множественное число существительных" },
-            { id: "a0-u3-l2", title: "Неопределённые артикли: un, uno, una" },
-            { id: "a0-u3-l3", title: "Определённые артикли: il, lo, la, i, gli, le" },
+            { id: "a0-u3-l2", title: "Неопределённые артикли: un, uno, una, un'" },
+            { id: "a0-u3-l3", title: "Определённые артикли: il, lo, l', la, i, gli, le" },
             { id: "a0-u3-l4", title: "Артикли в жизни: бар, дом, город" },
             { id: "a0-u3-l5", title: "Checkpoint: род, число и артикли", type: "checkpoint", xp: 60 }
           ]
@@ -52,7 +52,7 @@ window.COURSE = {
             { id: "a0-u4-l1", title: "Цвета, внешность и описание людей" },
             { id: "a0-u2-l3", title: "Правильные глаголы на -ARE" },
             { id: "a0-u4-l2", title: "Базовые неправильные глаголы: andare, venire, fare, stare" },
-            { id: "a0-u4-l3", title: "Семья, дом и конструкция c'e / ci sono" },
+            { id: "a0-u4-l3", title: "Семья, дом и конструкция c'è / ci sono" },
             { id: "a0-u2-l4", title: "Checkpoint: прилагательные, цвета, глаголы, семья и дом", type: "checkpoint", xp: 60 }
           ]
         }
@@ -67,11 +67,11 @@ window.COURSE = {
           id: "A1-U1",
           title: "A1-U1 - Настоящее время и важные глаголы",
           lessons: [
-            { id: "a1-u1-l1", title: "Глаголы на -ERE и -IRE в presente" },
-            { id: "a1-u1-l2", title: "Глаголы на -isc-: capire, finire, preferire" },
+            { id: "a1-u1-l1", title: "Глаголы на -ERE e -IRE al presente" },
+            { id: "a1-u1-l2", title: "Verbi su -isc-: capire, finire, preferire" },
             { id: "a1-u1-l3", title: "Dire, bere, uscire, sapere, conoscere" },
-            { id: "a1-u1-l4", title: "Отрицание и вопросы в presente" },
-            { id: "a1-u1-l5", title: "Checkpoint: presente и важные глаголы", type: "checkpoint", xp: 70 }
+            { id: "a1-u1-l4", title: "Negazione e domande al presente" },
+            { id: "a1-u1-l5", title: "Checkpoint: presente e verbi importanti", type: "checkpoint", xp: 70 }
           ]
         },
 
@@ -79,12 +79,12 @@ window.COURSE = {
           id: "A1-U2",
           title: "A1-U2 - Предлоги, город и направление",
           lessons: [
-            { id: "a1-u2-l1", title: "Простые предлоги: di, a, da, in, con, su, per, tra, fra" },
-            { id: "a1-u2-l2", title: "Артикулированные предлоги: del, al, dal, nel, sul" },
-            { id: "a1-u2-l3", title: "Места в городе" },
-            { id: "a1-u2-l4", title: "Как спросить дорогу и объяснить маршрут" },
-            { id: "a1-u2-l5", title: "Транспорт и покупка билета" },
-            { id: "a1-u2-l6", title: "Checkpoint: город, предлоги и маршрут", type: "checkpoint", xp: 70 }
+            { id: "a1-u2-l1", title: "Preposizioni semplici: di, a, da, in, con, su, per, tra, fra" },
+            { id: "a1-u2-l2", title: "Preposizioni articolate: del, al, dal, nel, sul" },
+            { id: "a1-u2-l3", title: "Luoghi in città" },
+            { id: "a1-u2-l4", title: "Chiedere la strada e spiegare il percorso" },
+            { id: "a1-u2-l5", title: "Trasporti e acquisto del biglietto" },
+            { id: "a1-u2-l6", title: "Checkpoint: città, preposizioni e percorso", type: "checkpoint", xp: 70 }
           ]
         },
 
@@ -92,12 +92,12 @@ window.COURSE = {
           id: "A1-U3",
           title: "A1-U3 - Люди, семья, описание и принадлежность",
           lessons: [
-            { id: "a1-u3-l1", title: "Притяжательные прилагательные: mio, tuo, suo..." },
-            { id: "a1-u3-l2", title: "Семья и отношения" },
-            { id: "a1-u3-l3", title: "Questo e quello: указательные местоимения" },
-            { id: "a1-u3-l4", title: "Профессии и работа" },
-            { id: "a1-u3-l5", title: "Характер, внешность и оценка людей" },
-            { id: "a1-u3-l6", title: "Checkpoint: люди, семья и описание", type: "checkpoint", xp: 60 }
+            { id: "a1-u3-l1", title: "Aggettivi possessivi: mio, tuo, suo..." },
+            { id: "a1-u3-l2", title: "Famiglia e relazioni" },
+            { id: "a1-u3-l3", title: "Questo e quello: pronomi dimostrativi" },
+            { id: "a1-u3-l4", title: "Professioni e lavoro" },
+            { id: "a1-u3-l5", title: "Carattere, aspetto e valutazione delle persone" },
+            { id: "a1-u3-l6", title: "Checkpoint: persone, famiglia e descrizione", type: "checkpoint", xp: 60 }
           ]
         },
 
@@ -105,12 +105,12 @@ window.COURSE = {
           id: "A1-U4",
           title: "A1-U4 - Еда, ресторан, покупки и деньги",
           lessons: [
-            { id: "a1-u4-l1", title: "Еда и напитки" },
-            { id: "a1-u4-l2", title: "Вкус и предпочтения: mi piace, vorrei" },
-            { id: "a1-u4-l3", title: "В баре и ресторане" },
-            { id: "a1-u4-l4", title: "Одежда, размер и примерка" },
-            { id: "a1-u4-l5", title: "Покупки, цены и оплата" },
-            { id: "a1-u4-l6", title: "Checkpoint: еда, ресторан и покупки", type: "checkpoint", xp: 60 }
+            { id: "a1-u4-l1", title: "Cibo e bevande" },
+            { id: "a1-u4-l2", title: "Gusto e preferenze: mi piace, vorrei" },
+            { id: "a1-u4-l3", title: "Al bar e al ristorante" },
+            { id: "a1-u4-l4", title: "Vestiti, taglia e prova" },
+            { id: "a1-u4-l5", title: "Shopping, prezzi e pagamento" },
+            { id: "a1-u4-l6", title: "Checkpoint: cibo, ristorante e shopping", type: "checkpoint", xp: 60 }
           ]
         },
 
@@ -118,12 +118,12 @@ window.COURSE = {
           id: "A1-U5",
           title: "A1-U5 - Время, дни недели, распоряд дня и частота",
           lessons: [
-            { id: "a1-u5-l1", title: "Che ore sono? Время и минуты" },
-            { id: "a1-u5-l2", title: "Giorni, mesi e stagioni: дни, месяцы, сезоны" },
-            { id: "a1-u5-l3", title: "La routine quotidiana: распоряд дня" },
-            { id: "a1-u5-l4", title: "Avverbi di frequenza: всегда, часто, иногда, никогда" },
+            { id: "a1-u5-l1", title: "Che ore sono? Ora e minuti" },
+            { id: "a1-u5-l2", title: "Giorni, mesi e stagioni" },
+            { id: "a1-u5-l3", title: "La routine quotidiana" },
+            { id: "a1-u5-l4", title: "Avverbi di frequenza: sempre, spesso, a volte, mai" },
             { id: "a1-u5-l5", title: "Preposizioni di tempo: a, in, di, alle, da...a" },
-            { id: "a1-u5-l6", title: "Checkpoint: время, дни, распоряд и частота", type: "checkpoint", xp: 70 }
+            { id: "a1-u5-l6", title: "Checkpoint: tempo, giorni, routine e frequenza", type: "checkpoint", xp: 70 }
           ]
         },
 
@@ -131,12 +131,12 @@ window.COURSE = {
           id: "A1-U6",
           title: "A1-U6 - Здоровье, погода, чувства и советы",
           lessons: [
-            { id: "a1-u6-l1", title: "Части тела и первые жалобы" },
-            { id: "a1-u6-l2", title: "Боль, врач и простые рекомендации" },
-            { id: "a1-u6-l3", title: "Il tempo: погода" },
-            { id: "a1-u6-l4", title: "Sentimenti e stati d'animo: чувства и состояния" },
-            { id: "a1-u6-l5", title: "Consigli: советы и рекомендации" },
-            { id: "a1-u6-l6", title: "Checkpoint: здоровье, погода, чувства и советы", type: "checkpoint", xp: 60 }
+            { id: "a1-u6-l1", title: "Parti del corpo e primi disturbi" },
+            { id: "a1-u6-l2", title: "Dolore, medico e semplici raccomandazioni" },
+            { id: "a1-u6-l3", title: "Il tempo: weather" },
+            { id: "a1-u6-l4", title: "Sentimenti e stati d'animo" },
+            { id: "a1-u6-l5", title: "Consigli: советов и рекомендаций" },
+            { id: "a1-u6-l6", title: "Checkpoint: salute, tempo, sentimenti e consigli", type: "checkpoint", xp: 60 }
           ]
         },
 
@@ -144,12 +144,12 @@ window.COURSE = {
           id: "A1-U7",
           title: "A1-U7 - Будущее, планы, путешествия и союзы",
           lessons: [
-            { id: "a1-u7-l1", title: "Futuro semplice: andro, faro, vedro" },
+            { id: "a1-u7-l1", title: "Futuro semplice: andrò, farò, vedrò" },
             { id: "a1-u7-l2", title: "Progetti e piani: presente e futuro" },
             { id: "a1-u7-l3", title: "In viaggio: aeroporto, hotel e biglietti" },
-            { id: "a1-u7-l4", title: "Perche, quando, se: причины, время и условие" },
-            { id: "a1-u7-l5", title: "Richieste gentili: vorrei, posso, mi puo" },
-            { id: "a1-u7-l6", title: "Checkpoint: будущее, планы и путешествия", type: "checkpoint", xp: 70 }
+            { id: "a1-u7-l4", title: "Perché, quando, se: cause, tempo e condizione" },
+            { id: "a1-u7-l5", title: "Richieste gentili: vorrei, posso, mi può" },
+            { id: "a1-u7-l6", title: "Checkpoint: futuro, piani e viaggi", type: "checkpoint", xp: 70 }
           ]
         },
 
@@ -160,7 +160,7 @@ window.COURSE = {
             { id: "a1-u8-l1", title: "Passato prossimo con avere" },
             { id: "a1-u8-l2", title: "Passato prossimo con essere" },
             { id: "a1-u8-l3", title: "Participi passati irregolari" },
-            { id: "a1-u8-l4", title: "Маркеры прошлого: ieri, fa, gia, non...ancora, mai" },
+            { id: "a1-u8-l4", title: "Маркеры прошлого: ieri, fa, già, non...ancora, mai" },
             { id: "a1-u8-l5", title: "Raccontare il weekend, un viaggio e la giornata" },
             { id: "a1-u8-l6", title: "Checkpoint: passato prossimo", type: "checkpoint", xp: 70 }
           ]
@@ -171,7 +171,7 @@ window.COURSE = {
           title: "A1-U9 - Итоговое повторение A1",
           lessons: [
             { id: "a1-u9-l1", title: "Grande ripasso: presente, passato, futuro", xp: 40 },
-            { id: "a1-u9-l2", title: "Citta, trasporti e viaggi: диалоги и ошибки", xp: 40 },
+            { id: "a1-u9-l2", title: "Città, trasporti e viaggi: диалоги и ошибки", xp: 40 },
             { id: "a1-u9-l3", title: "Persone, cibo, salute e shopping", xp: 40 },
             { id: "a1-u9-l4", title: "Final checkpoint A1", type: "checkpoint", xp: 100 }
           ]
