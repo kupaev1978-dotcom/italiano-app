@@ -8,11 +8,11 @@ window.LESSONS["a1-u9-l3"] = {
   theory: [
     {
       title: "Люди, чувства и здоровье",
-      summary: "Нужно уметь описать человека, сказать, что нравится, и пожаловаться на самочувствие.",
+      summary: "Bisogna saper descrivere una persona, dire cosa piace e lamentare un malessere.",
       rule: [
-        "La mia amica e simpatica. - Моя подруга славная.",
+        "La mia amica è simpatica. - Моя подруга славная.",
         "I miei genitori sono alti. - Мои родители высокие.",
-        "Mi piace il caffe. - Мне нравится кофе.",
+        "Mi piace il caffè. - Мне нравится кофе.",
         "Mi piacciono i dolci. - Мне нравятся сладости.",
         "Ho fame / sete / sonno / paura. - Я голоден / хочу пить / хочу спать / боюсь.",
         "Mi fa male la testa. - У меня болит голова.",
@@ -21,68 +21,68 @@ window.LESSONS["a1-u9-l3"] = {
       table: {
         headers: ["Тема", "Фраза"],
         rows: [
-          ["описание людей", "E alto, e simpatica, sono intelligenti."],
-          ["предпочтения", "Mi piace la pizza. Mi piacciono i film."],
-          ["состояния", "Ho fame. Ho sonno. Ho paura."],
-          ["боль", "Mi fa male la gola. Mi fanno male le gambe."]
+          ["descrivere persone", "È alto, è simpatica, sono intelligenti."],
+          ["preferenze", "Mi piace la pizza. Mi piacciono i film."],
+          ["stati", "Ho fame. Ho sonno. Ho paura."],
+          ["dolore", "Mi fa male la gola. Mi fanno male le gambe."]
         ]
       },
       tips: [
-        "Секрет: piace для единственного числа, piacciono для множественного.",
-        "Секрет: ho fame / ho sete / ho sonno / ho paura - это avere, не essere."
+        "Секрет: piace per il singolare, piacciono per il plurale.",
+        "Секрет: ho fame / ho sete / ho sonno / ho paura si costruiscono con avere, non con essere."
       ],
       mistakes: [
         "Не говори: Mi piace i dolci. Правильно: Mi piacciono i dolci.",
         "Не говори: Sono fame. Правильно: Ho fame.",
-        "Не говори: Maria e contento. Правильно: Maria e contenta."
+        "Не говори: Maria è contento. Правильно: Maria è contenta."
       ],
       examples: [
-        { it: "Marco e mio fratello.", ru: "Марко - мой брат." },
-        { it: "La mia casa e grande.", ru: "Мой дом большой." },
+        { it: "Marco è mio fratello.", ru: "Марко - мой брат." },
+        { it: "La mia casa è grande.", ru: "Мой дом большой." },
         { it: "Non mi piace la birra.", ru: "Мне не нравится пиво." },
         { it: "Ho mal di pancia.", ru: "У меня болит живот." }
       ]
     },
     {
       title: "Покупки, еда и вежливые просьбы",
-      summary: "В магазине и ресторане нужны простые фразы: Quanto costa?, Posso provare?, Vorrei..., Il conto, per favore.",
+      summary: "In negozio e al ristorante servono frasi semplici: Quanto costa?, Posso provare?, Vorrei..., Il conto, per favore.",
       rule: [
         "Quanto costa? - Сколько стоит один предмет?",
         "Quanto costano? - Сколько стоят несколько предметов?",
         "Posso provare questa giacca? - Можно примерить этот пиджак?",
         "Che taglia hai? - Какой у тебя размер?",
-        "Vorrei un caffe, per favore. - Я хотел бы кофе, пожалуйста.",
+        "Vorrei un caffè, per favore. - Я хотел бы кофе, пожалуйста.",
         "Il conto, per favore. - Счёт, пожалуйста.",
         "Mi fa lo scontrino, per favore. - Дайте мне чек, пожалуйста."
       ],
       table: {
         headers: ["Ситуация", "Фраза"],
         rows: [
-          ["цена одного предмета", "Quanto costa?"],
-          ["цена нескольких предметов", "Quanto costano?"],
-          ["примерка", "Posso provare...?"],
-          ["заказ в баре", "Vorrei un caffe."],
-          ["счёт", "Il conto, per favore."]
+          ["prezzo singolare", "Quanto costa?"],
+          ["prezzo plurale", "Quanto costano?"],
+          ["prova", "Posso provare...?"],
+          ["ordine al bar", "Vorrei un caffè."],
+          ["conto", "Il conto, per favore."]
         ]
       },
       tips: [
-        "Секрет: costa для singular, costano для plural.",
-        "Секрет: Vorrei + артикль + существительное: Vorrei una camera, Vorrei un biglietto."
+        "Секрет: costa per il singolare, costano per il plurale.",
+        "Секрет: Vorrei + articolo + nome: Vorrei una camera, Vorrei un biglietto."
       ],
       mistakes: [
         "Не говори: Quanto costa le scarpe? Правильно: Quanto costano le scarpe?",
         "Не говори: Vorrei camera. Правильно: Vorrei una camera.",
-        "Не говори: Voglio caffe, если хочешь быть вежливым. Лучше: Vorrei un caffe."
+        "Не говори: Voglio caffè se vuoi essere gentile. Meglio: Vorrei un caffè."
       ],
       examples: [
         { it: "Queste scarpe costano cinquanta euro.", ru: "Эти туфли стоят пятьдесят евро." },
         { it: "Vorrei una pizza margherita.", ru: "Я хотел бы пиццу маргарита." },
         { it: "Posso pagare con la carta?", ru: "Можно заплатить картой?" },
-        { it: "E troppo caro.", ru: "Это слишком дорого." }
+        { it: "È troppo caro.", ru: "Это слишком дорого." }
       ],
       dialog: [
         { who: "Commesso", text: "Posso aiutarLa?", ru: "Могу я вам помочь?" },
-        { who: "Cliente", text: "Si, cerco una giacca nera.", ru: "Да, я ищу чёрный пиджак." },
+        { who: "Cliente", text: "Sì, cerco una giacca nera.", ru: "Да, я ищу чёрный пиджак." },
         { who: "Commesso", text: "Che taglia ha?", ru: "Какой у вас размер?" },
         { who: "Cliente", text: "La 42. Posso provarla?", ru: "Сорок второй. Можно примерить?" }
       ]
@@ -97,12 +97,12 @@ window.LESSONS["a1-u9-l3"] = {
       ],
       options: [
         "Cerco una giacca nera.",
-        "Vorrei un caffe.",
+        "Vorrei un caffè.",
         "Ho mal di testa.",
         "Il treno parte alle otto."
       ],
       answer: "Cerco una giacca nera.",
-      hint: "В магазине одежды говорят, что ищут.",
+      hint: "In un negozio di abbigliamento si dice cosa si cerca.",
       explain: "Cerco una giacca nera - я ищу чёрный пиджак."
     },
     {
@@ -115,7 +115,7 @@ window.LESSONS["a1-u9-l3"] = {
         { text: "pizza", id: "3" }
       ],
       answer: "wrong",
-      hint: "Pizza - единственное число.",
+      hint: "Pizza è singolare.",
       explain: "Правильно: Mi piace la pizza."
     },
     {
@@ -124,7 +124,7 @@ window.LESSONS["a1-u9-l3"] = {
       sentence: "Quanto ___ queste scarpe?",
       options: ["costano", "costa", "costo", "costiamo"],
       answer: "costano",
-      hint: "Scarpe - множественное число.",
+      hint: "Scarpe è plurale.",
       explain: "Quanto costano queste scarpe? - Сколько стоят эти туфли?"
     },
     {
@@ -137,7 +137,7 @@ window.LESSONS["a1-u9-l3"] = {
         { left: "ho paura", right: "мне страшно" },
         { left: "mi fa male la testa", right: "у меня болит голова" }
       ],
-      explain: "Эти состояния выражаются через avere.",
+      explain: "Questi stati si esprimono con avere.",
       explainWrong: "Неверная пара. Fame = голод, sete = жажда, sonno = сон, paura = страх, testa = голова."
     },
     {
@@ -145,7 +145,7 @@ window.LESSONS["a1-u9-l3"] = {
       question: "Заполни перевод",
       headers: ["Italiano", "Русский"],
       rows: [
-        ["La mia amica e simpatica.", "Моя подруга славная."],
+        ["La mia amica è simpatica.", "Моя подруга славная."],
         ["I miei genitori sono alti.", ""]
       ],
       targetRow: 1,
@@ -157,7 +157,7 @@ window.LESSONS["a1-u9-l3"] = {
         "Мои родители высота."
       ],
       answer: "Мои родители высокие.",
-      hint: "Genitori - множественное число.",
+      hint: "Genitori è plurale.",
       explain: "I miei genitori sono alti - мои родители высокие."
     },
     {
@@ -171,7 +171,7 @@ window.LESSONS["a1-u9-l3"] = {
         "mi fa male la gola"
       ],
       placeholder: "Напиши по-итальянски",
-      hint: "Ho mal di + часть тела.",
+      hint: "Ho mal di + parte del corpo.",
       explain: "Ho mal di gola - у меня болит горло."
     },
     {
@@ -179,7 +179,7 @@ window.LESSONS["a1-u9-l3"] = {
       question: "Собери фразу: «Я хотел бы двухместный номер»",
       words: ["Vorrei", "una", "camera", "doppia"],
       answer: "Vorrei una camera doppia",
-      hint: "Camera женского рода: doppia.",
+      hint: "Camera è femminile: doppia.",
       explain: "Vorrei una camera doppia - я хотел бы двухместный номер."
     },
     {
@@ -198,11 +198,11 @@ window.LESSONS["a1-u9-l3"] = {
     {
       type: "error-choice",
       question: "Найди ошибку",
-      sentence: "Maria e contento.",
-      options: ["Maria", "e", "contento"],
+      sentence: "Maria è contento.",
+      options: ["Maria", "è", "contento"],
       answer: "contento",
-      hint: "Maria - женский род.",
-      explain: "Правильно: Maria e contenta."
+      hint: "Maria è femminile.",
+      explain: "Правильно: Maria è contenta."
     },
     {
       type: "dialog-choice",
@@ -217,7 +217,7 @@ window.LESSONS["a1-u9-l3"] = {
         "Costa poco."
       ],
       answer: "Mi fa male la schiena.",
-      hint: "Вопрос про боль.",
+      hint: "La domanda riguarda il dolore.",
       explain: "Mi fa male la schiena - у меня болит спина."
     }
   ]
