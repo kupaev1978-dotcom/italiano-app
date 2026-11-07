@@ -67,7 +67,7 @@ window.COURSE = {
           id: "A1-U1",
           title: "A1-U1 - Настоящее время и важные глаголы",
           lessons: [
-            { id: "a1-u1-l1", title: "Глаголы на -ERE e -IRE al presente" },
+            { id: "a1-u1-l1", title: "Verbi su -ERE e -IRE al presente" },
             { id: "a1-u1-l2", title: "Verbi su -isc-: capire, finire, preferire" },
             { id: "a1-u1-l3", title: "Dire, bere, uscire, sapere, conoscere" },
             { id: "a1-u1-l4", title: "Negazione e domande al presente" },
@@ -133,9 +133,9 @@ window.COURSE = {
           lessons: [
             { id: "a1-u6-l1", title: "Parti del corpo e primi disturbi" },
             { id: "a1-u6-l2", title: "Dolore, medico e semplici raccomandazioni" },
-            { id: "a1-u6-l3", title: "Il tempo: weather" },
+            { id: "a1-u6-l3", title: "Il tempo: meteo" },
             { id: "a1-u6-l4", title: "Sentimenti e stati d'animo" },
-            { id: "a1-u6-l5", title: "Consigli: советов и рекомендаций" },
+            { id: "a1-u6-l5", title: "Consigli: советы и рекомендации" },
             { id: "a1-u6-l6", title: "Checkpoint: salute, tempo, sentimenti e consigli", type: "checkpoint", xp: 60 }
           ]
         },
@@ -182,7 +182,20 @@ window.COURSE = {
     {
       id: "A2",
       title: "A2 - Расширенное общение",
-      units: []
+      units: [
+        {
+          id: "A2-U1",
+          title: "A2-U1 - Passato imperfetto: прошлое как фон",
+          lessons: [
+            { id: "a2-u1-l1", title: "Imperfetto regolare: parlavo, credevo, dormivo" },
+            { id: "a2-u1-l2", title: "Imperfetto irregolare: ero, facevo, bevevo" },
+            { id: "a2-u1-l3", title: "Abitudini nel passato: da bambino, una volta, di solito" },
+            { id: "a2-u1-l4", title: "Descrivere persone, luoghi e tempo: era, c'era, c'erano" },
+            { id: "a2-u1-l5", title: "Prima e adesso: imperfetto contro presente" },
+            { id: "a2-u1-l6", title: "Checkpoint: imperfetto", type: "checkpoint", xp: 70 }
+          ]
+        }
+      ]
     }
   ]
 };
