@@ -194,6 +194,19 @@ window.COURSE = {
             { id: "a2-u1-l5", title: "Prima e adesso: imperfetto contro presente" },
             { id: "a2-u1-l6", title: "Checkpoint: imperfetto", type: "checkpoint", xp: 70 }
           ]
+        },
+
+        {
+          id: "A2-U2",
+          title: "A2-U2 - Passato prossimo vs imperfetto: racconto",
+          lessons: [
+            { id: "a2-u2-l1", title: "Due aspetti del passato: imperfetto contro passato prossimo" },
+            { id: "a2-u2-l2", title: "Sfondo ed evento principale" },
+            { id: "a2-u2-l3", title: "Mentre, quando, appena" },
+            { id: "a2-u2-l4", title: "Raccontare una storia breve" },
+            { id: "a2-u2-l5", title: "Errori tipici: passato prossimo contro imperfetto" },
+            { id: "a2-u2-l6", title: "Checkpoint: racconto al passato", type: "checkpoint", xp: 70 }
+          ]
         }
       ]
     }
