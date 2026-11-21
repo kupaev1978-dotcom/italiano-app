@@ -207,6 +207,19 @@ window.COURSE = {
             { id: "a2-u2-l5", title: "Errori tipici: passato prossimo contro imperfetto" },
             { id: "a2-u2-l6", title: "Checkpoint: racconto al passato", type: "checkpoint", xp: 70 }
           ]
+        },
+
+        {
+          id: "A2-U3",
+          title: "A2-U3 - Pronomi diretti e ne",
+          lessons: [
+            { id: "a2-u3-l1", title: "Pronomi diretti: lo, la, li, le" },
+            { id: "a2-u3-l2", title: "Posizione dei pronomi diretti" },
+            { id: "a2-u3-l3", title: "Participio passato con i pronomi diretti" },
+            { id: "a2-u3-l4", title: "Pronomi tonici: me, te, lui, lei, noi, voi, loro" },
+            { id: "a2-u3-l5", title: "Ne: quantità e parte di un tutto" },
+            { id: "a2-u3-l6", title: "Checkpoint: pronomi diretti e ne", type: "checkpoint", xp: 70 }
+          ]
         }
       ]
     }
